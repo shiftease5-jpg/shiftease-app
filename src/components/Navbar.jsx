@@ -55,9 +55,9 @@ export default function Navbar() {
           <Link to="/" onClick={handleHomeClick}>Home</Link>
           <a href="/#trust" onClick={closeMenu}>Why ShiftEase</a>
           <a href="/#services" onClick={closeMenu}>Services</a>
-          <Link to="/track" onClick={closeMenu} style={{color: 'var(--secondary-color)', fontWeight: 'bold'}}>Live Tracking</Link>
+          <Link to="/track" onClick={closeMenu} style={{color: 'var(--secondary-color)', fontWeight: 'bold'}}>Tracking</Link>
           <a href="tel:+919967728718" onClick={closeMenu} style={{fontWeight: '500'}}>
-            🟢 24/7 Support
+            🟢 Support
           </a>
           
           <div className="mobile-only-btn">

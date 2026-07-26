@@ -15,15 +15,11 @@ export default function QuoteSection({ city }) {
     <section className="section bg-light" id="quote-form">
       <div className="container quote-container">
         <div className="section-header">
-          <h2 className="section-title">Get Your Free Quote</h2>
+          <h2 className="section-title">Get Your Fixed Moving Quote</h2>
           <p className="section-subtitle">
-            Moving should be simple. Fill in your move details.<br />
-            We'll contact you within 5 minutes.
+            Takes less than 30 seconds
           </p>
-          <div style={{marginTop: '20px', color: '#4B5563', fontWeight: '500', display: 'flex', alignItems: 'center', gap: '8px'}}>
-             <span style={{color: '#F59E0B', fontSize: '1.2rem'}}>★★★★★</span> 
-             Trusted by 500+ families across Mumbai
-          </div>
+          {/* Trust text has moved to Hero section */}
         </div>
         
         <div className="quote-form-wrapper fade-in-up">

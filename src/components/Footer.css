@@ -13,6 +13,28 @@
   flex-direction: column;
 }
 
+.footer-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #d2d2d7;
+  color: #424245;
+  font-weight: 500;
+}
+
+.footer-trust-row span {
+  white-space: nowrap;
+}
+
+.footer-bottom-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .footer-copyright {
   margin-bottom: 12px;
   color: #6e6e73;
@@ -50,10 +72,11 @@
 }
 
 @media (min-width: 768px) {
-  .footer-apple-content {
+  .footer-bottom-row {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
   }
   
   .footer-copyright {

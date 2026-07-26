@@ -12,7 +12,7 @@ export default function Hero({ city, serviceName }) {
       <div className="hero-container container">
         
         <div className="hero-content">
-          <p className="hero-eyebrow fade-in-up">Tech-Enabled Relocation</p>
+          <p className="hero-eyebrow fade-in-up">India's modern moving platform.</p>
           <h1 className="hero-title fade-in-up" style={{animationDelay: '0.1s'}}>
             Move<br />
             Without<br />
@@ -20,8 +20,7 @@ export default function Hero({ city, serviceName }) {
           </h1>
           
           <p className="hero-subtitle fade-in-up" style={{animationDelay: '0.2s'}}>
-            Professional packers and movers in {city || 'Mumbai'} with live GPS tracking, 
-            transparent pricing, and verified moving teams.
+            Professional packers and movers in {city || 'Mumbai'} with live GPS tracking, transparent pricing, and verified professionals.
           </p>
           
           <div className="hero-cta fade-in-up" style={{animationDelay: '0.3s'}}>
@@ -33,11 +32,7 @@ export default function Hero({ city, serviceName }) {
             </Link>
           </div>
           
-          <div className="hero-trust-metrics fade-in-up" style={{animationDelay: '0.4s'}}>
-            <div className="trust-metric">✓ Transparent Pricing</div>
-            <div className="trust-metric">✓ Live GPS Tracking</div>
-            <div className="trust-metric">✓ Insured Moving</div>
-          </div>
+          {/* Removed inline trust metrics to move to full-width banner */}
         </div>
 
         <div className="hero-visual fade-in-up" style={{animationDelay: '0.3s'}}>
@@ -50,6 +45,21 @@ export default function Hero({ city, serviceName }) {
           </div>
         </div>
 
+      </div>
+
+      <div className="hero-trust-banner-fullwidth fade-in-up" style={{animationDelay: '0.5s'}}>
+        <div className="container trust-banner-content">
+          <div className="trust-banner-stars">
+            ★★★★★ <span>Trusted by 500+ families</span>
+          </div>
+          <div className="trust-banner-items">
+            <span>✓ Verified Drivers</span>
+            <span>✓ Live GPS Tracking</span>
+            <span>✓ No Hidden Charges</span>
+            <span>✓ On-Time Delivery</span>
+            <span>✓ Damage Protection</span>
+          </div>
+        </div>
       </div>
     </section>
   );

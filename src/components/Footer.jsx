@@ -6,7 +6,15 @@ export default function Footer() {
     <footer className="footer-apple">
       <div className="container">
         <div className="footer-apple-content">
-          <p className="footer-copyright">
+          <div className="footer-trust-row">
+            <span>✔ GST Number</span>
+            <span>✔ Business Hours</span>
+            <span>✔ Office Address</span>
+            <span>✔ Google Reviews</span>
+          </div>
+          
+          <div className="footer-bottom-row">
+            <p className="footer-copyright">
             Copyright © {new Date().getFullYear()} ShiftEase. All rights reserved.
           </p>
           <ul className="footer-apple-links">
@@ -16,6 +24,7 @@ export default function Footer() {
             <li><a href="mailto:shiftease5@gmail.com">Support</a></li>
             <li><a href="tel:+919797820423">Contact</a></li>
           </ul>
+          </div>
         </div>
       </div>
     </footer>

@@ -36,12 +36,12 @@
 }
 
 .hero-content {
-  flex: 1.2;
-  max-width: 650px;
+  flex: 1.35;
+  max-width: 680px;
 }
 
 .hero-image-wrapper {
-  flex: 0.8;
+  flex: 0.65;
   display: flex;
   justify-content: flex-end;
 }
@@ -88,30 +88,7 @@
   margin-bottom: 40px;
 }
 
-.hero-trust-metrics {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  padding: 16px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  flex-wrap: wrap;
-}
-
-.trust-metric {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #334155;
-  white-space: nowrap;
-}
-
-.trust-metric .emoji {
-  font-size: 1.1rem;
-}
-
+/* Removed old inline trust metrics */
 .hero-trust-indicators {
   display: flex;
   flex-wrap: wrap;
@@ -128,6 +105,56 @@
   font-weight: 500;
 }
 
+
+/* Trust Banner Full Width */
+.hero-trust-banner-fullwidth {
+  width: 100%;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 24px 0;
+  margin-top: 60px;
+}
+
+.trust-banner-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.trust-banner-stars {
+  color: #F59E0B;
+  font-size: 1.25rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  letter-spacing: 2px;
+}
+
+.trust-banner-stars span {
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+.trust-banner-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+
+.trust-banner-items span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+}
 
 /* Right Side Form Wrapper */
 .hero-form-wrapper {
@@ -402,17 +429,7 @@
   .hero-cta button, .hero-cta a {
     width: 100%;
   }
-  .hero-trust-metrics {
-    justify-content: center;
-    border-top: none;
-    border-bottom: none;
-    padding: 0;
-    gap: 12px;
-    margin-bottom: 40px;
-  }
-  .trust-metric {
-    font-size: 0.85rem;
-  }
+  /* Old trust metrics styles removed */
   .form-row {
     flex-direction: column;
     gap: 0;
