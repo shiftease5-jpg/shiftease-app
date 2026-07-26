@@ -13,6 +13,7 @@ import Testimonials from './Testimonials';
 import FAQ from './FAQ';
 import Footer from './Footer';
 import FloatingActions from './FloatingActions';
+import SchemaInjector from './SchemaInjector';
 
 // Helper to format city names (mumbai -> Mumbai)
 const formatCity = (city) => {
@@ -49,10 +50,8 @@ export default function CityLandingPage() {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />
         <link rel="canonical" href={`https://shiftease.in/packers-and-movers-${city}`} />
-        <script type="application/ld+json">
-          {JSON.stringify(localBusinessSchema)}
-        </script>
       </Helmet>
+      <SchemaInjector schemaData={localBusinessSchema} />
       <main>
         {/* Pass city to components that need dynamic text */}
         <Hero city={formattedCity} />

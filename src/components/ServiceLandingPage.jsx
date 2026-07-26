@@ -8,6 +8,7 @@ import HowItWorks from './HowItWorks';
 import Testimonials from './Testimonials';
 import Footer from './Footer';
 import FloatingActions from './FloatingActions';
+import SchemaInjector from './SchemaInjector';
 
 // Helper to format service names (house-shifting -> House Shifting)
 const formatService = (serviceId) => {
@@ -48,10 +49,8 @@ export default function ServiceLandingPage() {
         <title>{seoTitle}</title>
         <meta name="description" content={seoDesc} />
         <link rel="canonical" href={`https://shiftease.in/service/${serviceId}`} />
-        <script type="application/ld+json">
-          {JSON.stringify(serviceSchema)}
-        </script>
       </Helmet>
+      <SchemaInjector schemaData={serviceSchema} />
       <main>
         {/* We can pass service name to Hero so it adjusts the H1 tag appropriately */}
         <Hero serviceName={formattedService} />
