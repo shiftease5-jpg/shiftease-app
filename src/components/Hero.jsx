@@ -53,6 +53,10 @@ export default function Hero({ city }) {
             <span style={{color: '#059669'}}>Tech-Enabled Relocation</span>
           </div>
 
+          <div className="hero-mobile-visual">
+            <Truck size={42} color="#F97316" />
+          </div>
+
           <h1 className="hero-title">
             {city ? `Premium Packers and Movers in ` : `Modern, Transparent `}
             <span className="text-gradient">{city ? city : 'Relocation.'}</span>
@@ -63,6 +67,13 @@ export default function Hero({ city }) {
               ? `Safe relocation in ${city} with live GPS tracking, trained professionals, and honest pricing.`
               : `Safe relocation with live GPS tracking, trained professionals, and honest pricing. No surprises.`}
           </p>
+
+          <button 
+            className="btn-primary hero-mobile-cta" 
+            onClick={() => document.getElementById('quote-form')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            🟧 Get Free Quote
+          </button>
 
           <div className="hero-trust-list">
             <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Transparent Pricing</span></div>

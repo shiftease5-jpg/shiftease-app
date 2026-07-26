@@ -68,6 +68,11 @@
   margin-bottom: 32px;
 }
 
+.hero-mobile-visual,
+.hero-mobile-cta {
+  display: none;
+}
+
 .hero-trust-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -214,6 +219,18 @@
   .hero {
     padding-top: 90px;
     padding-bottom: 20px;
+  }
+  .hero-mobile-visual {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .hero-mobile-cta {
+    display: inline-flex;
+    width: 100%;
+    margin-bottom: 32px;
+    font-size: 1.1rem;
+    background-color: var(--secondary-color);
   }
   .hero-title {
     font-size: 2.4rem;

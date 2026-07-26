@@ -52,6 +52,9 @@ export default function Navbar() {
           <Link to="/track" onClick={closeMenu} style={{color: 'var(--secondary-color)', fontWeight: 'bold'}}>Live Truck Tracking</Link>
           <Link to="/driver" onClick={closeMenu} className="btn-primary" style={{textDecoration: 'none'}}>Driver Portal</Link>
           <Link to="/admin" onClick={closeMenu} style={{color: '#94a3b8', fontSize: '0.9rem'}}>Admin</Link>
+          <button onClick={handleQuoteClick} className="btn-primary mobile-only-btn">
+            Get a Quote
+          </button>
         </nav>
 
         <button onClick={handleQuoteClick} className="btn-primary nav-btn" style={{ textDecoration: 'none' }}>

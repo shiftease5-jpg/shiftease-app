@@ -35,3 +35,14 @@
     transform: translateY(0);
   }
 }
+
+.mobile-only-btn {
+  display: none;
+}
+
+.mobile-open .mobile-only-btn {
+  display: flex !important;
+  width: 100%;
+  margin-top: 12px;
+  justify-content: center;
+}
