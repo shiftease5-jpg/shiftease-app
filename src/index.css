@@ -73,6 +73,7 @@ button {
 
 .section {
   padding: 80px 0;
+  scroll-margin-top: 80px; /* Accounts for the fixed header height during anchor scrolling */
 }
 
 .section-header {
