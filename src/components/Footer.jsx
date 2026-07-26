@@ -7,10 +7,9 @@ export default function Footer() {
       <div className="container">
         <div className="footer-apple-content">
           <div className="footer-trust-row">
-            <span>✔ GST Number</span>
-            <span>✔ Business Hours</span>
-            <span>✔ Office Address</span>
-            <span>✔ Google Reviews</span>
+            <span>✔ 8am to 10pm (7 Days)</span>
+            <span>✔ Lokhandwala, Kandivali East 400101</span>
+            <span>✔ 5-Star Google Reviews</span>
           </div>
           
           <div className="footer-bottom-row">
