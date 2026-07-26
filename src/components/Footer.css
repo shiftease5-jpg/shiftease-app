@@ -186,8 +186,8 @@
   background: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* 4-Column Grid */
-.footer-grid-4 {
+/* Grid */
+.footer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px;

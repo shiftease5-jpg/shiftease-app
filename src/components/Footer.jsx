@@ -86,15 +86,29 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* 4-Column Navigation */}
-          <div className="footer-grid-4">
+          {/* Multi-Column Navigation */}
+          <div className="footer-grid">
             <div className="footer-col">
               <h4>SERVICES</h4>
               <ul className="footer-links">
-                <li><a href="#services" onClick={(e) => handleScroll(e, '#services')}><Home size={16} className="link-icon" /> <span>Home Moving</span></a></li>
-                <li><a href="#services" onClick={(e) => handleScroll(e, '#services')}><Briefcase size={16} className="link-icon" /> <span>Office Moving</span></a></li>
-                <li><a href="#services" onClick={(e) => handleScroll(e, '#services')}><Car size={16} className="link-icon" /> <span>Vehicle Transport</span></a></li>
-                <li><a href="#services" onClick={(e) => handleScroll(e, '#services')}><Package size={16} className="link-icon" /> <span>Storage</span></a></li>
+                <li><a href="/service/house-shifting"><Home size={16} className="link-icon" /> <span>House Shifting</span></a></li>
+                <li><a href="/service/office-relocation"><Briefcase size={16} className="link-icon" /> <span>Office Relocation</span></a></li>
+                <li><a href="/service/bike-transport"><Car size={16} className="link-icon" /> <span>Bike Transport</span></a></li>
+                <li><a href="/service/car-transport"><Car size={16} className="link-icon" /> <span>Car Transport</span></a></li>
+                <li><a href="/service/packing-services"><Package size={16} className="link-icon" /> <span>Packing Services</span></a></li>
+                <li><a href="/service/storage-services"><Package size={16} className="link-icon" /> <span>Storage Services</span></a></li>
+              </ul>
+            </div>
+            
+            <div className="footer-col">
+              <h4>SERVICE AREAS</h4>
+              <ul className="footer-links">
+                <li><a href="/packers-and-movers-mumbai"><MapPin size={16} className="link-icon" /> <span>Mumbai</span></a></li>
+                <li><a href="/packers-and-movers-andheri"><MapPin size={16} className="link-icon" /> <span>Andheri</span></a></li>
+                <li><a href="/packers-and-movers-bandra"><MapPin size={16} className="link-icon" /> <span>Bandra</span></a></li>
+                <li><a href="/packers-and-movers-thane"><MapPin size={16} className="link-icon" /> <span>Thane</span></a></li>
+                <li><a href="/packers-and-movers-navi-mumbai"><MapPin size={16} className="link-icon" /> <span>Navi Mumbai</span></a></li>
+                <li><a href="/packers-and-movers-pune"><MapPin size={16} className="link-icon" /> <span>Pune</span></a></li>
               </ul>
             </div>
             
