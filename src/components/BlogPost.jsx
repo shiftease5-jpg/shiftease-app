@@ -77,7 +77,7 @@ export default function BlogPost() {
             Let our professional Move Managers handle all the heavy lifting. Get an instant, transparent quote today.
           </p>
           <a 
-            href="https://wa.me/919967728718?text=Hi%20ShiftEase,%20I%20read%20your%20blog%20and%20I'm%20interested%20in%20getting%20an%20instant%20quote%20for%20my%20move." 
+            href="https://wa.me/919797820423?text=Hi%20ShiftEase,%20I%20read%20your%20blog%20and%20I'm%20interested%20in%20getting%20an%20instant%20quote%20for%20my%20move." 
             target="_blank"
             rel="noopener noreferrer"
             style={{
