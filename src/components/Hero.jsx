@@ -40,7 +40,16 @@ export default function Hero({ city }) {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    if (name === 'phone') {
+      const numericValue = value.replace(/\D/g, '').slice(0, 10);
+      setFormData({ ...formData, [name]: numericValue });
+    } else if (name === 'name') {
+      const alphaValue = value.replace(/[^A-Za-z\s]/g, '');
+      setFormData({ ...formData, [name]: alphaValue });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   return (
@@ -136,28 +145,33 @@ export default function Hero({ city }) {
               <form className="quote-form" onSubmit={handleSubmit}>
                 
                 <div className="form-group-premium">
-                  <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} required />
+                  <label className="form-label">Full Name</label>
+                  <input type="text" name="name" placeholder="John Doe" value={formData.name} onChange={handleChange} required pattern="[A-Za-z ]{2,50}" title="Please enter a valid name (2-50 characters, letters only)" />
                 </div>
 
                 <div className="form-group-premium">
+                  <label className="form-label">Moving From</label>
                   <div className="input-icon-wrapper">
                     <MapPin size={18} className="input-icon" />
-                    <input type="text" name="from" placeholder="Moving From (e.g. Mumbai)" value={formData.from} onChange={handleChange} required />
+                    <input type="text" name="from" placeholder="e.g. Mumbai" value={formData.from} onChange={handleChange} required />
                   </div>
                 </div>
 
                 <div className="form-group-premium">
+                  <label className="form-label">Moving To</label>
                   <div className="input-icon-wrapper">
                     <MapPin size={18} className="input-icon" color="#f97316" />
-                    <input type="text" name="to" placeholder="Moving To (e.g. Bangalore)" value={formData.to} onChange={handleChange} required />
+                    <input type="text" name="to" placeholder="e.g. Bangalore" value={formData.to} onChange={handleChange} required />
                   </div>
                 </div>
 
                 <div className="form-row">
-                  <div className="form-group-premium" style={{flex: 1}}>
+                  <div className="form-group-premium" style={{flex: 55}}>
+                    <label className="form-label">Moving Date</label>
                     <input type="date" name="date" value={formData.date} onChange={handleChange} required title="Moving Date" />
                   </div>
-                  <div className="form-group-premium" style={{flex: 1}}>
+                  <div className="form-group-premium" style={{flex: 45}}>
+                    <label className="form-label">Home Size</label>
                     <select name="size" value={formData.size} onChange={handleChange}>
                       <option value="1 BHK">1 BHK</option>
                       <option value="2 BHK">2 BHK</option>
@@ -170,17 +184,18 @@ export default function Hero({ city }) {
                 </div>
 
                 <div className="form-group-premium">
+                  <label className="form-label">Phone Number</label>
                   <input 
                     type="tel" 
+                    inputMode="numeric"
                     name="phone" 
-                    placeholder="Your Phone Number (10 digits)" 
+                    placeholder="10-digit Mobile Number" 
                     value={formData.phone} 
                     onChange={handleChange} 
                     required 
                     pattern="[0-9]{10}"
                     maxLength="10"
                     title="Please enter exactly 10 digits"
-                    onKeyPress={(e) => { if (!/[0-9]/.test(e.key)) e.preventDefault(); }}
                   />
                 </div>
                 
