@@ -115,7 +115,7 @@
 /* Map Stats Overlay */
 .map-stats-overlay {
   position: absolute;
-  top: 20px;
+  top: 120px;
   right: 20px;
   display: flex;
   flex-direction: column;
