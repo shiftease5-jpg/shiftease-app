@@ -267,4 +267,8 @@
   .trust-item:nth-child(n+5) {
     display: none;
   }
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
 }

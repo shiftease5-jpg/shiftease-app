@@ -3,7 +3,7 @@ import { ShieldCheck, Truck, Clock, Star, MapPin, CheckCircle2, FileText } from 
 import './Hero.css';
 
 export default function Hero({ city }) {
-  const [formData, setFormData] = useState({ from: city || '', to: '', date: '', size: '1 BHK', phone: '' });
+  const [formData, setFormData] = useState({ name: '', from: city || '', to: '', date: '', size: '1 BHK', phone: '' });
   const [status, setStatus] = useState('idle');
 
   const handleSubmit = async (e) => {
@@ -18,7 +18,7 @@ export default function Hero({ city }) {
         body: JSON.stringify(formData)
       });
       
-      const message = `Hi ShiftEase! I need an instant estimate. 🚚\n\n📍 From: ${formData.from}\n📍 To: ${formData.to}\n🏠 Size: ${formData.size}\n📅 Date: ${formData.date}\n📞 Phone: ${formData.phone}`;
+      const message = `Hi ShiftEase! I need an instant estimate. 🚚\n\n👤 Name: ${formData.name}\n📍 From: ${formData.from}\n📍 To: ${formData.to}\n🏠 Size: ${formData.size}\n📅 Date: ${formData.date}\n📞 Phone: ${formData.phone}`;
       const encodedMessage = encodeURIComponent(message);
       const whatsappNumber = "919797820423";
       window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
@@ -33,7 +33,7 @@ export default function Hero({ city }) {
 
   const handleNewRequest = () => {
     setStatus('idle');
-    setFormData({ from: city || '', to: '', date: '', size: '1 BHK', phone: '' });
+    setFormData({ name: '', from: city || '', to: '', date: '', size: '1 BHK', phone: '' });
   };
 
   const handleChange = (e) => {
@@ -113,6 +113,10 @@ export default function Hero({ city }) {
               <form className="quote-form" onSubmit={handleSubmit}>
                 
                 <div className="form-group-premium">
+                  <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} required />
+                </div>
+
+                <div className="form-group-premium">
                   <div className="input-icon-wrapper">
                     <MapPin size={18} className="input-icon" />
                     <input type="text" name="from" placeholder="Moving From (e.g. Mumbai)" value={formData.from} onChange={handleChange} required />
@@ -143,7 +147,18 @@ export default function Hero({ city }) {
                 </div>
 
                 <div className="form-group-premium">
-                  <input type="tel" name="phone" placeholder="Your Phone Number" value={formData.phone} onChange={handleChange} required />
+                  <input 
+                    type="tel" 
+                    name="phone" 
+                    placeholder="Your Phone Number (10 digits)" 
+                    value={formData.phone} 
+                    onChange={handleChange} 
+                    required 
+                    pattern="[0-9]{10}"
+                    maxLength="10"
+                    title="Please enter exactly 10 digits"
+                    onKeyPress={(e) => { if (!/[0-9]/.test(e.key)) e.preventDefault(); }}
+                  />
                 </div>
                 
                 <button type="submit" className="btn-primary btn-premium-submit" disabled={status === 'loading'}>
