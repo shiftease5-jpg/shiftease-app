@@ -4,6 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh; /* Dynamic viewport for iOS Safari */
   z-index: 9999;
   background: #0f172a;
   display: flex;
@@ -65,10 +66,17 @@
   color: white;
 }
 
+.driver-info {
+  min-width: 0; /* Allows flex children to truncate */
+}
+
 .driver-info h3 {
   margin: 0 0 4px 0;
   color: white;
   font-size: 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .driver-vehicle {
@@ -79,6 +87,10 @@
   color: #94a3b8;
   display: inline-block;
   font-family: monospace;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* Status Indicator */
@@ -186,7 +198,7 @@
   border-radius: 24px 24px 0 0;
   box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
   z-index: 1000;
-  max-height: 50vh;
+  max-height: 50dvh;
   overflow-y: auto;
 }
 
@@ -196,7 +208,7 @@
     left: 20px;
     width: 380px;
     border-radius: 20px;
-    max-height: calc(100vh - 180px); /* Leave room for top header */
+    max-height: calc(100dvh - 180px); /* Leave room for top header */
   }
 }
 
