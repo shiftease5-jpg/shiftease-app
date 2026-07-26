@@ -34,7 +34,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 1000;
+  z-index: 1005; /* Always stay on top */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -196,7 +196,7 @@
     left: 20px;
     width: 380px;
     border-radius: 20px;
-    max-height: calc(100vh - 130px); /* Leave room for top header */
+    max-height: calc(100vh - 180px); /* Leave room for top header */
   }
 }
 
