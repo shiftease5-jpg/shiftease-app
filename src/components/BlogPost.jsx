@@ -76,7 +76,11 @@ export default function BlogPost() {
           <p style={{ color: '#cbd5e1', fontSize: '1.1rem', marginBottom: '32px', maxWidth: '500px', margin: '0 auto 32px auto' }}>
             Let our professional Move Managers handle all the heavy lifting. Get an instant, transparent quote today.
           </p>
-          <a href="/#quote-form" style={{
+          <a 
+            href="https://wa.me/919967728718?text=Hi%20ShiftEase,%20I%20read%20your%20blog%20and%20I'm%20interested%20in%20getting%20an%20instant%20quote%20for%20my%20move." 
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
             display: 'inline-block',
             background: '#f97316',
             color: 'white',
