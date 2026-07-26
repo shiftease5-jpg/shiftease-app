@@ -66,8 +66,12 @@ export default function Navbar() {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
       </div>
+      
+      {/* Mobile Menu Backdrop */}
+      {mobileMenuOpen && (
+        <div className="mobile-menu-backdrop" onClick={closeMenu}></div>
+      )}
     </header>
   );
 }
