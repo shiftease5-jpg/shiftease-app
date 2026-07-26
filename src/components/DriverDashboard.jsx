@@ -162,6 +162,20 @@ export default function DriverDashboard() {
     return safeCoords[Math.abs(hash) % safeCoords.length];
   };
 
+  const getAccurateCurrentPosition = () => {
+    return new Promise((resolve) => {
+      if (!navigator.geolocation) {
+        resolve(position);
+      } else {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => resolve([pos.coords.latitude, pos.coords.longitude]),
+          (err) => resolve(position),
+          { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+      }
+    });
+  };
+
   const handleSearchJob = async (e) => {
     e.preventDefault();
     const dropoffQuery = e.target.dropoff.value;
@@ -170,8 +184,8 @@ export default function DriverDashboard() {
     
     setSearchState('loading');
     
-    // Automatically use driver's exact current GPS coordinates!
-    const pickupCoords = position; 
+    // Automatically fetch driver's exact fresh high-accuracy GPS coordinates!
+    const pickupCoords = await getAccurateCurrentPosition(); 
     const dropoffCoords = await searchLocation(dropoffQuery);
     
     if (pickupCoords && dropoffCoords) {
