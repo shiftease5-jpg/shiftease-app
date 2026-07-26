@@ -7,8 +7,8 @@ const quoteSchema = new mongoose.Schema({
   date: { type: String, required: true },
   size: { type: String, required: true },
   phone: { type: String, required: true },
-  price: { type: Number, required: true },
-  distance: { type: Number, required: true },
+  price: { type: Number, required: false },
+  distance: { type: Number, required: false },
   status: { type: String, default: 'Pending' }
 }, { timestamps: true });
 

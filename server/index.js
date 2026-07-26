@@ -92,24 +92,8 @@ app.post('/driver/signup', async (req, res) => {
 app.post('/quote', async (req, res) => {
   const { name, from, to, date, size, phone } = req.body;
   
-  // Dummy Pricing Logic for Demo
-  const basePrice = 1500;
-  let sizeMultiplier = 1;
-  if (size === '2 BHK') sizeMultiplier = 1.5;
-  if (size === '3 BHK') sizeMultiplier = 2;
-  if (size === '4+ BHK') sizeMultiplier = 2.5;
-  if (size === 'Independent House') sizeMultiplier = 3;
-  if (size === 'Office') sizeMultiplier = 4;
-  
-  const estimatedDistanceKm = Math.floor(Math.random() * 800) + 50; // Random distance 50-850km
-  const perKmRate = 25;
-  
-  const calculatedPrice = Math.floor(basePrice + (estimatedDistanceKm * perKmRate) * sizeMultiplier);
-  
   const newQuoteData = { 
     name, from, to, date, size, phone, 
-    price: calculatedPrice, 
-    distance: estimatedDistanceKm, 
     status: 'Pending' 
   };
   
@@ -126,11 +110,10 @@ app.post('/quote', async (req, res) => {
   console.log('\n================================');
   console.log('🚨 NEW LEAD SAVED TO DATABASE! 🚨');
   console.log(`From: ${from} To: ${to}`);
-  console.log(`Size: ${size} Distance: ${estimatedDistanceKm}km`);
-  console.log(`Calculated Price: ₹${calculatedPrice}`);
+  console.log(`Size: ${size}`);
   console.log('================================\n');
   
-  res.json({ success: true, message: 'Quote calculated successfully', quote: newQuoteData });
+  res.json({ success: true, message: 'Quote request received successfully', quote: newQuoteData });
 });
 
 app.put('/quote/:id/book', async (req, res) => {
