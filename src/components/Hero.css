@@ -111,6 +111,7 @@
   max-width: 450px;
   z-index: 2;
   position: relative;
+  scroll-margin-top: 100px; /* Prevents the form from hiding under the fixed header when scrolled to */
 }
 
 .form-group-premium {
