@@ -308,6 +308,7 @@
   padding: 16px 24px;
   text-align: left;
   border-bottom: 1px solid #334155;
+  white-space: nowrap;
 }
 
 .admin-table th {
