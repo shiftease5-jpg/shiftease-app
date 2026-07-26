@@ -10,7 +10,7 @@
   
   /* Text */
   --text-main: #1D1D1F;
-  --text-light: #86868B;
+  --text-light: #4B5563;
   
   /* Shadows & Glass */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -70,7 +70,7 @@ button {
 }
 
 .section {
-  padding: 140px 0;
+  padding: 120px 0;
   scroll-margin-top: 80px; 
 }
 

@@ -7,6 +7,7 @@
 .service-item {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .service-image-wrapper {
@@ -26,6 +27,12 @@
 
 .service-item:hover .service-image {
   transform: scale(1.05);
+}
+
+.service-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .service-content h3 {
@@ -48,6 +55,7 @@
   font-weight: 500;
   color: var(--secondary-color);
   transition: var(--transition);
+  margin-top: auto;
 }
 
 .service-link:hover {

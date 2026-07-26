@@ -34,10 +34,9 @@ export default function Hero({ city, serviceName }) {
           </div>
           
           <div className="hero-trust-metrics fade-in-up" style={{animationDelay: '0.4s'}}>
-            <div className="trust-metric"><span className="emoji">📦</span> 1000+ Moves</div>
-            <div className="trust-metric"><span className="emoji">⭐</span> 4.9 Rating</div>
-            <div className="trust-metric"><span className="emoji">📍</span> {city || 'Mumbai'}</div>
-            <div className="trust-metric"><span className="emoji">🛡️</span> GPS Tracking</div>
+            <div className="trust-metric">✓ Fixed Pricing</div>
+            <div className="trust-metric">✓ Live GPS Tracking</div>
+            <div className="trust-metric">✓ Insured Moving</div>
           </div>
         </div>
 
