@@ -26,7 +26,7 @@ export default function Navbar() {
     }
   };
 
-  if (location.pathname.startsWith('/admin') || location.pathname.startsWith('/driver')) {
+  if (location.pathname.startsWith('/admin') || location.pathname.startsWith('/driver/dashboard') || location.pathname.startsWith('/simulator')) {
     return null;
   }
 
