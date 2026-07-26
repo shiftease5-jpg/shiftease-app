@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Hero.css';
 
 export default function Hero({ city, serviceName }) {
@@ -19,19 +20,25 @@ export default function Hero({ city, serviceName }) {
           </h1>
           
           <p className="hero-subtitle fade-in-up" style={{animationDelay: '0.2s'}}>
-            Safe relocation in {city || 'Mumbai'} with live GPS tracking, 
-            professional movers and transparent pricing.
+            Professional packers and movers in {city || 'Mumbai'} with live GPS tracking, 
+            transparent pricing, and verified moving teams.
           </p>
           
           <div className="hero-cta fade-in-up" style={{animationDelay: '0.3s'}}>
-            <button className="btn-primary btn-large" onClick={scrollToQuote}>
+            <button className="btn-primary" onClick={scrollToQuote}>
               Get Free Quote
             </button>
+            <Link to="/track" className="btn-secondary">
+              Live Tracking
+            </Link>
           </div>
           
-          <p className="hero-trust fade-in-up" style={{animationDelay: '0.4s'}}>
-            Trusted across {city || 'Mumbai'}
-          </p>
+          <div className="hero-trust-metrics fade-in-up" style={{animationDelay: '0.4s'}}>
+            <div className="trust-metric"><span className="emoji">📦</span> 1000+ Moves</div>
+            <div className="trust-metric"><span className="emoji">⭐</span> 4.9 Rating</div>
+            <div className="trust-metric"><span className="emoji">📍</span> {city || 'Mumbai'}</div>
+            <div className="trust-metric"><span className="emoji">🛡️</span> GPS Tracking</div>
+          </div>
         </div>
 
         <div className="hero-visual fade-in-up" style={{animationDelay: '0.3s'}}>

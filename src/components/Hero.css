@@ -40,6 +40,20 @@
   max-width: 650px;
 }
 
+.hero-image-wrapper {
+  flex: 0.8;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05); /* Adds a subtle Apple-like shadow to lift the image */
+  transform: translateZ(0); /* Hardware acceleration for shadow */
+}
+
 .hero-badge {
   display: inline-flex;
   align-items: center;
@@ -68,32 +82,34 @@
   margin-bottom: 32px;
 }
 
-.hero-mobile-visual,
-.hero-mobile-cta,
-.hero-mobile-trust {
-  display: none;
-}
-
-.hero-trust-list {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.hero-cta {
+  display: flex;
   gap: 16px;
   margin-bottom: 40px;
 }
 
-.trust-item {
+.hero-trust-metrics {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 500;
-  color: #334155;
-  font-size: 1.05rem;
+  gap: 24px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  flex-wrap: wrap;
 }
 
-.hero-desktop-ctas {
+.trust-metric {
   display: flex;
-  gap: 16px;
-  margin-bottom: 32px;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.trust-metric .emoji {
+  font-size: 1.1rem;
 }
 
 .hero-trust-indicators {
