@@ -50,14 +50,14 @@ export default function Hero({ city, serviceName }) {
       <div className="hero-trust-banner-fullwidth fade-in-up" style={{animationDelay: '0.5s'}}>
         <div className="container trust-banner-content">
           <div className="trust-banner-stars">
-            ★★★★★ <span>Trusted by 500+ families</span>
+            ★★★★★ <span className="stars-score">4.9</span> <span>Trusted by 500+ families</span>
           </div>
           <div className="trust-banner-items">
-            <span>✓ Verified Drivers</span>
-            <span>✓ Live GPS Tracking</span>
-            <span>✓ No Hidden Charges</span>
-            <span>✓ On-Time Delivery</span>
-            <span>✓ Damage Protection</span>
+            <span>✓ <span className="hide-on-mobile">Live </span>GPS<span className="hide-on-mobile"> Tracking</span></span>
+            <span>✓ Verified<span className="hide-on-mobile"> Drivers</span></span>
+            <span>✓ On-time<span className="hide-on-mobile"> Delivery</span></span>
+            <span className="hide-on-mobile">✓ No Hidden Charges</span>
+            <span className="hide-on-mobile">✓ Damage Protection</span>
           </div>
         </div>
       </div>
