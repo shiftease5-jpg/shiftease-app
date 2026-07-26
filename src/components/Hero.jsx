@@ -115,13 +115,13 @@ export default function Hero({ city }) {
               <MapContainer 
                 center={[21.1458, 79.0882]} // Center of India (Nagpur)
                 zoom={4} 
-                zoomControl={false} 
-                dragging={false} 
-                scrollWheelZoom={false} 
-                doubleClickZoom={false}
-                style={{ height: '160px', width: '100%', zIndex: 1 }}
+                zoomControl={true} 
+                dragging={true} 
+                scrollWheelZoom={true} 
+                doubleClickZoom={true}
+                style={{ height: '180px', width: '100%', zIndex: 1 }}
               >
-                <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
+                <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
                 {/* Mumbai to Bangalore demo route */}
                 <Marker position={[19.0760, 72.8777]} icon={new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png', iconSize: [20, 32], iconAnchor: [10, 32] })} />
                 <Marker position={[12.9716, 77.5946]} icon={new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png', iconSize: [20, 32], iconAnchor: [10, 32] })} />
