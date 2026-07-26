@@ -19,7 +19,7 @@ export default function Footer() {
           <ul className="footer-apple-links">
             <li><Link to="/privacy">Privacy Policy</Link></li>
             <li><Link to="/terms">Terms of Use</Link></li>
-            <li><Link to="/blog">News</Link></li>
+            <li><Link to="/blog">Blog</Link></li>
             <li><a href="mailto:shiftease5@gmail.com">Support</a></li>
             <li><a href="tel:+919797820423">Contact</a></li>
           </ul>

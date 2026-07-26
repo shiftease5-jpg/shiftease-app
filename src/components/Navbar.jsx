@@ -55,6 +55,7 @@ export default function Navbar() {
           <Link to="/" onClick={handleHomeClick}>Home</Link>
           <a href="/#trust" onClick={closeMenu}>Why ShiftEase</a>
           <a href="/#services" onClick={closeMenu}>Services</a>
+          <Link to="/blog" onClick={closeMenu}>Blog</Link>
           <Link to="/track" onClick={closeMenu} style={{color: 'var(--secondary-color)', fontWeight: 'bold'}}>Tracking</Link>
           <a href="tel:+919967728718" onClick={closeMenu} style={{fontWeight: '500'}}>
             🟢 Support
