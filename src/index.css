@@ -164,6 +164,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 24px;
 }
 
 .logo {
@@ -283,7 +284,7 @@ button {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .nav-links {
     display: none;
   }
