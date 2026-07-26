@@ -103,6 +103,7 @@ button {
   background-color: var(--secondary-color);
   color: white;
   padding: 12px 28px;
+  border: 1px solid transparent;
   border-radius: 980px; /* Apple pill shape */
   font-size: 1.125rem;
   transition: var(--transition);
@@ -123,7 +124,7 @@ button {
   background-color: transparent;
   color: var(--primary-color);
   border: 1px solid var(--primary-color);
-  padding: 11px 27px;
+  padding: 12px 28px;
   border-radius: 980px;
   font-size: 1.125rem;
   transition: var(--transition);
