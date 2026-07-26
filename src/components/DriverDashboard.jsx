@@ -147,19 +147,19 @@ export default function DriverDashboard() {
 
   const handleSearchJob = async (e) => {
     e.preventDefault();
-    const pickupQuery = e.target.pickup.value;
     const dropoffQuery = e.target.dropoff.value;
     
-    if (!pickupQuery || !dropoffQuery) return;
+    if (!dropoffQuery) return;
     
     setSearchState('loading');
     
-    const pickupCoords = await searchLocation(pickupQuery);
+    // Automatically use driver's exact current GPS coordinates!
+    const pickupCoords = position; 
     const dropoffCoords = await searchLocation(dropoffQuery);
     
     if (pickupCoords && dropoffCoords) {
       setJobDetails({
-        pickup: pickupQuery,
+        pickup: "Current Location",
         pickupCoords,
         dropoff: dropoffQuery,
         dropoffCoords,
@@ -366,9 +366,12 @@ export default function DriverDashboard() {
                 <h4 style={{ margin: '0 0 16px 0', color: 'white' }}>Find New Job</h4>
                 <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '16px' }}>Enter a pickup and drop-off location (e.g. "Mumbai" or "Pune") to generate a new tracking route.</p>
                 <form onSubmit={handleSearchJob} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                  <input type="text" name="pickup" placeholder="Enter Pickup Location..." style={{ padding: '12px', borderRadius: '8px', border: '1px solid #334155', background: '#0f172a', color: 'white' }} required />
+                  <div style={{ padding: '12px', borderRadius: '8px', border: '1px solid #334155', background: '#1e293b', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3b82f6', boxShadow: '0 0 8px #3b82f6' }} />
+                    <span style={{ fontSize: '0.9rem' }}>Current Location (Auto-detected via GPS)</span>
+                  </div>
                   <input type="text" name="dropoff" placeholder="Enter Destination..." style={{ padding: '12px', borderRadius: '8px', border: '1px solid #334155', background: '#0f172a', color: 'white' }} required />
-                  {searchState === 'error' && <p style={{ color: '#ef4444', fontSize: '0.8rem', margin: 0 }}>Could not find locations. Try being more specific.</p>}
+                  {searchState === 'error' && <p style={{ color: '#ef4444', fontSize: '0.8rem', margin: 0 }}>Could not find location. Try being more specific.</p>}
                   <button type="submit" disabled={searchState === 'loading'} style={{ padding: '12px', borderRadius: '8px', background: '#3b82f6', color: 'white', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>
                     {searchState === 'loading' ? 'Searching...' : 'Assign Job'}
                   </button>
