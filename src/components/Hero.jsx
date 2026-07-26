@@ -8,6 +8,7 @@ import './Hero.css';
 export default function Hero({ city }) {
   const [formData, setFormData] = useState({ name: '', from: city || '', to: '', date: '', size: '1 BHK', phone: '' });
   const [status, setStatus] = useState('idle');
+  const [quoteResult, setQuoteResult] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,27 +16,44 @@ export default function Hero({ city }) {
     
     try {
       const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
-      await fetch(`${API_URL}/quote`, {
+      const res = await fetch(`${API_URL}/quote`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
       });
+      const data = await res.json();
       
-      const message = `Hi ShiftEase! I need an instant estimate. 🚚\n\n👤 Name: ${formData.name}\n📍 From: ${formData.from}\n📍 To: ${formData.to}\n🏠 Size: ${formData.size}\n📅 Date: ${formData.date}\n📞 Phone: ${formData.phone}`;
-      const encodedMessage = encodeURIComponent(message);
-      const whatsappNumber = "919797820423";
-      window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
-      
-      setStatus('success');
+      if (data.success) {
+        setQuoteResult(data.quote);
+        setStatus('quote_ready');
+      } else {
+        throw new Error(data.message);
+      }
     } catch (err) {
       console.error(err);
       setStatus('idle');
-      alert('Failed to submit quote. Please try again.');
+      alert('Failed to calculate quote. Please try again.');
+    }
+  };
+
+  const handleConfirmBooking = async () => {
+    setStatus('confirming');
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+      await fetch(`${API_URL}/quote/${quoteResult._id}/book`, {
+        method: 'PUT'
+      });
+      setStatus('success');
+    } catch (err) {
+      console.error(err);
+      alert('Failed to confirm booking.');
+      setStatus('quote_ready');
     }
   };
 
   const handleNewRequest = () => {
     setStatus('idle');
+    setQuoteResult(null);
     setFormData({ name: '', from: city || '', to: '', date: '', size: '1 BHK', phone: '' });
   };
 
@@ -132,11 +150,50 @@ export default function Hero({ city }) {
             <div className="hero-form-inner">
               <h3 style={{marginBottom: '24px', textAlign: 'center', fontSize: '1.4rem'}}>Get Instant Estimate</h3>
             
-            {status === 'success' ? (
-              <div className="success-state">
+            {status === 'quote_ready' || status === 'confirming' ? (
+              <div className="quote-result-card fade-in-up">
+                <h4 style={{ color: '#0f172a', marginBottom: '16px', fontSize: '1.2rem', textAlign: 'center' }}>Your Instant Quote</h4>
+                
+                <div className="quote-price-box">
+                  <span className="currency">₹</span>
+                  <span className="amount">{quoteResult?.price?.toLocaleString('en-IN')}</span>
+                </div>
+                
+                <div className="quote-details-list">
+                  <div className="detail-item">
+                    <span>Distance</span>
+                    <strong>~{quoteResult?.distance} km</strong>
+                  </div>
+                  <div className="detail-item">
+                    <span>Home Size</span>
+                    <strong>{quoteResult?.size}</strong>
+                  </div>
+                  <div className="detail-item">
+                    <span>Date</span>
+                    <strong>{new Date(quoteResult?.date).toLocaleDateString()}</strong>
+                  </div>
+                </div>
+
+                <button 
+                  className="btn-primary btn-premium-submit" 
+                  onClick={handleConfirmBooking}
+                  disabled={status === 'confirming'}
+                >
+                  {status === 'confirming' ? 'Confirming...' : 'Confirm Booking & Dispatch'}
+                </button>
+                <button 
+                  className="btn-secondary" 
+                  style={{width: '100%', marginTop: '12px', padding: '12px', borderRadius: '12px', background: 'transparent', border: '1px solid #cbd5e1', color: '#64748b', cursor: 'pointer'}} 
+                  onClick={() => setStatus('idle')}
+                >
+                  Cancel
+                </button>
+              </div>
+            ) : status === 'success' ? (
+              <div className="success-state fade-in-up">
                 <div style={{ fontSize: '48px', marginBottom: '16px' }}>🎉</div>
-                <h4 style={{ color: '#059669', marginBottom: '8px' }}>Estimate Sent!</h4>
-                <p style={{ color: '#475569', fontSize: '0.95rem' }}>Our team will call you at <strong>{formData.phone}</strong> in 5 minutes.</p>
+                <h4 style={{ color: '#059669', marginBottom: '8px' }}>Booking Confirmed!</h4>
+                <p style={{ color: '#475569', fontSize: '0.95rem' }}>Your driver is being assigned. We will text you at <strong>{formData.phone}</strong> with live tracking details shortly.</p>
                 <button className="btn-primary" style={{ marginTop: '24px', width: '100%' }} onClick={handleNewRequest}>
                   Calculate Another Move
                 </button>

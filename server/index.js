@@ -90,23 +90,64 @@ app.post('/driver/signup', async (req, res) => {
 });
 
 app.post('/quote', async (req, res) => {
-  const { from, to, date, phone } = req.body;
+  const { name, from, to, date, size, phone } = req.body;
+  
+  // Dummy Pricing Logic for Demo
+  const basePrice = 1500;
+  let sizeMultiplier = 1;
+  if (size === '2 BHK') sizeMultiplier = 1.5;
+  if (size === '3 BHK') sizeMultiplier = 2;
+  if (size === '4+ BHK') sizeMultiplier = 2.5;
+  if (size === 'Independent House') sizeMultiplier = 3;
+  if (size === 'Office') sizeMultiplier = 4;
+  
+  const estimatedDistanceKm = Math.floor(Math.random() * 800) + 50; // Random distance 50-850km
+  const perKmRate = 25;
+  
+  const calculatedPrice = Math.floor(basePrice + (estimatedDistanceKm * perKmRate) * sizeMultiplier);
+  
+  const newQuoteData = { 
+    name, from, to, date, size, phone, 
+    price: calculatedPrice, 
+    distance: estimatedDistanceKm, 
+    status: 'Pending' 
+  };
   
   if (useMongo) {
-    const newQuote = new Quote({ from, to, date, phone });
+    const newQuote = new Quote(newQuoteData);
     await newQuote.save();
+    newQuoteData._id = newQuote._id;
   } else {
-    quotesDB.push({ from, to, date, phone, createdAt: new Date() });
+    newQuoteData._id = 'quote_' + Date.now();
+    newQuoteData.createdAt = new Date();
+    quotesDB.push(newQuoteData);
   }
   
   console.log('\n================================');
   console.log('🚨 NEW LEAD SAVED TO DATABASE! 🚨');
-  console.log(`From: ${from}`);
-  console.log(`To: ${to}`);
-  console.log(`Date: ${date}`);
-  console.log(`Phone: ${phone}`);
+  console.log(`From: ${from} To: ${to}`);
+  console.log(`Size: ${size} Distance: ${estimatedDistanceKm}km`);
+  console.log(`Calculated Price: ₹${calculatedPrice}`);
   console.log('================================\n');
-  res.json({ success: true, message: 'Quote request received successfully' });
+  
+  res.json({ success: true, message: 'Quote calculated successfully', quote: newQuoteData });
+});
+
+app.put('/quote/:id/book', async (req, res) => {
+  const { id } = req.params;
+  
+  if (useMongo) {
+    await Quote.findByIdAndUpdate(id, { status: 'Booked' });
+  } else {
+    const quote = quotesDB.find(q => q._id === id);
+    if (quote) quote.status = 'Booked';
+  }
+  
+  console.log('\n================================');
+  console.log(`✅ BOOKING CONFIRMED FOR QUOTE ${id}! ✅`);
+  console.log('================================\n');
+  
+  res.json({ success: true, message: 'Booking confirmed' });
 });
 
 // Admin Data Route

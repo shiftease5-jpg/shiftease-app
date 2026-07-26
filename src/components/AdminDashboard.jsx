@@ -34,9 +34,9 @@ export default function AdminDashboard() {
       console.warn('Backend not available, loading premium mock data for demo.');
       // Premium Mock Data Fallback
       setQuotes([
-        { _id: 'q1', createdAt: Date.now() - 86400000, from: 'Bandra West, Mumbai', to: 'Koramangala, Bangalore', date: '2026-08-01', phone: '+91 98765 43210', size: '2 BHK' },
-        { _id: 'q2', createdAt: Date.now() - 172800000, from: 'Andheri East, Mumbai', to: 'Pune City', date: '2026-07-28', phone: '+91 91234 56789', size: '1 BHK' },
-        { _id: 'q3', createdAt: Date.now(), from: 'Gurgaon Sector 52', to: 'Hitech City, Hyderabad', date: '2026-08-15', phone: '+91 99887 76655', size: '3 BHK' }
+        { _id: 'q1', createdAt: Date.now() - 86400000, from: 'Bandra West, Mumbai', to: 'Koramangala, Bangalore', date: '2026-08-01', phone: '+91 98765 43210', size: '2 BHK', price: 25500, status: 'Booked' },
+        { _id: 'q2', createdAt: Date.now() - 172800000, from: 'Andheri East, Mumbai', to: 'Pune City', date: '2026-07-28', phone: '+91 91234 56789', size: '1 BHK', price: 6500, status: 'Pending' },
+        { _id: 'q3', createdAt: Date.now(), from: 'Gurgaon Sector 52', to: 'Hitech City, Hyderabad', date: '2026-08-15', phone: '+91 99887 76655', size: '3 BHK', price: 42000, status: 'Booked' }
       ]);
       setDrivers([
         { _id: 'd1', createdAt: Date.now() - 5000000000, name: 'Ramesh Kumar', phone: '9876543210', vehicle: 'MH12AB1234', trackingId: 'TRK-382256', status: 'On Trip' },
@@ -149,13 +149,15 @@ export default function AdminDashboard() {
                       <th>Date</th>
                       <th>Route</th>
                       <th>Move Size</th>
+                      <th>Price</th>
+                      <th>Status</th>
                       <th>Contact</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     {quotes.length === 0 ? (
-                      <tr><td colSpan="5" className="empty-state">No quotes yet.</td></tr>
+                      <tr><td colSpan="7" className="empty-state">No quotes yet.</td></tr>
                     ) : (
                       quotes.map((quote, idx) => (
                         <tr key={quote._id || idx}>
@@ -168,8 +170,20 @@ export default function AdminDashboard() {
                             </div>
                           </td>
                           <td><span className="size-badge">{quote.size || '1 BHK'}</span></td>
+                          <td><strong>₹{quote.price?.toLocaleString('en-IN') || '---'}</strong></td>
+                          <td>
+                            <span className={`status-badge ${quote.status?.toLowerCase() || 'pending'}`}>
+                              {quote.status || 'Pending'}
+                            </span>
+                          </td>
                           <td>{quote.phone}</td>
-                          <td><button className="action-link">Assign</button></td>
+                          <td>
+                            {quote.status === 'Booked' ? (
+                              <button className="action-link" style={{color: '#10b981'}}>Assign Driver</button>
+                            ) : (
+                              <button className="action-link" style={{color: '#94a3b8'}} disabled>Follow Up</button>
+                            )}
+                          </td>
                         </tr>
                       ))
                     )}
