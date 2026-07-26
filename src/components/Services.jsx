@@ -1,28 +1,26 @@
-import { ArrowRight, Home, Briefcase, Car } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import './Services.css';
 
 export default function Services() {
   const services = [
     {
-      icon: <Home size={40} className="service-icon-svg" />,
-      title: "Home Relocation",
-      description: "Professional packing, 3-layer furniture protection, and full transit insurance for your complete household.",
-      price: "Starting ₹4,999",
-      delay: "0.1s"
+      id: "house-shifting",
+      title: "Local Moving",
+      description: "Seamless relocation within your city. Professional packing and transport.",
+      image: "/images/movers_carrying_1785087185307.png"
     },
     {
-      icon: <Briefcase size={40} className="service-icon-svg" />,
-      title: "Office Relocation",
-      description: "Zero downtime corporate shifting. We handle IT infrastructure, cubicles, and files with military precision.",
-      price: "Starting ₹9,999",
-      delay: "0.2s"
+      id: "intercity-moving",
+      title: "Intercity Moving",
+      description: "Secure long-distance transport with live GPS tracking included.",
+      image: "/images/hero_truck_1785087164697.png"
     },
     {
-      icon: <Car size={40} className="service-icon-svg" />,
-      title: "Vehicle Transport",
-      description: "Safe transportation for cars and bikes in enclosed GPS-tracked carriers with wheel chocks and safety straps.",
-      price: "Starting ₹2,999",
-      delay: "0.3s"
+      id: "packing-services",
+      title: "Premium Packing",
+      description: "3-layer secure packing using industry-leading materials.",
+      image: "/images/packed_living_room_1785087175625.png"
     }
   ];
 
@@ -30,33 +28,22 @@ export default function Services() {
     <section className="section bg-light" id="services">
       <div className="container">
         <div className="section-header">
-          <h2 className="section-title text-gradient">Our Premium Services</h2>
-          <p className="section-subtitle">Tailored, tech-enabled relocation solutions to meet your specific needs.</p>
+          <h2 className="section-title">Our Services</h2>
+          <p className="section-subtitle">Everything you need for a perfect move.</p>
         </div>
         
-        <div className="services-grid-premium">
+        <div className="services-grid">
           {services.map((service, idx) => (
-            <div className="service-card-premium fade-in-up" style={{animationDelay: service.delay}} key={idx}>
-              <div className="service-card-content">
-                <div className="service-icon-wrapper">
-                  {service.icon}
-                </div>
+            <div className="service-item fade-in-up" style={{animationDelay: `${idx * 0.1}s`}} key={idx}>
+              <div className="service-image-wrapper">
+                <img src={service.image} alt={service.title} className="service-image" />
+              </div>
+              <div className="service-content">
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
-                <div className="service-price">{service.price}</div>
-              </div>
-              <div 
-                className="service-card-action" 
-                onClick={() => {
-                  const message = `Hi ShiftEase! I am looking for more details about your ${service.title} service.`;
-                  const encodedMessage = encodeURIComponent(message);
-                  const whatsappNumber = "919797820423";
-                  window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank', 'noopener,noreferrer');
-                }}
-                style={{ cursor: 'pointer' }}
-              >
-                <span>More Details</span>
-                <ArrowRight size={20} />
+                <Link to={`/service/${service.id}`} className="service-link">
+                  Learn more <ArrowRight size={16} />
+                </Link>
               </div>
             </div>
           ))}

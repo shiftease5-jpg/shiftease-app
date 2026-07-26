@@ -6,6 +6,7 @@ import Features from './Features';
 import Services from './Services';
 import HowItWorks from './HowItWorks';
 import Testimonials from './Testimonials';
+import QuoteSection from './QuoteSection';
 import Footer from './Footer';
 import FloatingActions from './FloatingActions';
 import SchemaInjector from './SchemaInjector';
@@ -58,6 +59,7 @@ export default function ServiceLandingPage() {
         <HowItWorks />
         <Services />
         <Testimonials />
+        <QuoteSection />
       </main>
       <Footer />
       <FloatingActions />

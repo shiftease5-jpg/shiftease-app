@@ -6,12 +6,8 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import Services from './components/Services';
 import HowItWorks from './components/HowItWorks';
-import TrackingPreview from './components/TrackingPreview';
-import Pricing from './components/Pricing';
-import VolumeCalculator from './components/VolumeCalculator';
-import Fleet from './components/Fleet';
-import FAQ from './components/FAQ';
 import Testimonials from './components/Testimonials';
+import QuoteSection from './components/QuoteSection';
 import Footer from './components/Footer';
 import FloatingActions from './components/FloatingActions';
 import TrackingMap from './components/TrackingMap';
@@ -49,14 +45,10 @@ function LandingPage() {
       <main>
         <Hero />
         <Features />
-        <Services />
-        <TrackingPreview />
         <HowItWorks />
-        <Pricing />
-        <VolumeCalculator />
-        <Fleet />
+        <Services />
         <Testimonials />
-        <FAQ />
+        <QuoteSection />
       </main>
       <Footer />
       <FloatingActions />
