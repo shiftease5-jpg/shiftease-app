@@ -394,17 +394,24 @@
   .hero-badge {
     margin-bottom: 12px;
   }
-  .hero-trust-list {
-    grid-template-columns: 1fr 1fr;
+  .hero-cta {
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .hero-cta button, .hero-cta a {
+    width: 100%;
+  }
+  .hero-trust-metrics {
+    justify-content: center;
+    border-top: none;
+    border-bottom: none;
+    padding: 0;
     gap: 12px;
-    margin-bottom: 80px; /* Add bottom margin so floating buttons don't block text */
+    margin-bottom: 40px;
   }
-  .trust-item {
+  .trust-metric {
     font-size: 0.85rem;
-  }
-  /* Hide the last 2 items on mobile to save vertical space */
-  .trust-item:nth-child(n+5) {
-    display: none;
   }
   .form-row {
     flex-direction: column;
