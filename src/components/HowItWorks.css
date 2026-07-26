@@ -49,4 +49,7 @@
     grid-template-columns: 1fr;
     gap: 48px;
   }
+  .timeline-number {
+    font-size: 2rem;
+  }
 }
