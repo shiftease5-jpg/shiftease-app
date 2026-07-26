@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { ShieldCheck, Truck, Clock, Star, MapPin, CheckCircle2, FileText } from 'lucide-react';
+import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import './Hero.css';
 
 export default function Hero({ city }) {
@@ -98,7 +101,27 @@ export default function Hero({ city }) {
         <div className="hero-form-wrapper fade-in-up" style={{ animationDelay: '0.2s' }}>
 
           <div className="hero-form-card glass-premium" id="quote-form">
-            <h3 style={{marginBottom: '24px', textAlign: 'center', fontSize: '1.4rem'}}>Get Instant Estimate</h3>
+            <div className="hero-form-map-banner">
+              <MapContainer 
+                center={[21.1458, 79.0882]} // Center of India (Nagpur)
+                zoom={4} 
+                zoomControl={false} 
+                dragging={false} 
+                scrollWheelZoom={false} 
+                doubleClickZoom={false}
+                style={{ height: '160px', width: '100%', zIndex: 1 }}
+              >
+                <TileLayer url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" />
+                {/* Mumbai to Bangalore demo route */}
+                <Marker position={[19.0760, 72.8777]} icon={new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png', iconSize: [20, 32], iconAnchor: [10, 32] })} />
+                <Marker position={[12.9716, 77.5946]} icon={new L.Icon({ iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png', iconSize: [20, 32], iconAnchor: [10, 32] })} />
+                <Polyline positions={[[19.0760, 72.8777], [12.9716, 77.5946]]} color="#f97316" weight={3} dashArray="6, 8" />
+              </MapContainer>
+              <div className="map-banner-overlay"></div>
+            </div>
+
+            <div className="hero-form-inner">
+              <h3 style={{marginBottom: '24px', textAlign: 'center', fontSize: '1.4rem'}}>Get Instant Estimate</h3>
             
             {status === 'success' ? (
               <div className="success-state">
@@ -167,6 +190,7 @@ export default function Hero({ city }) {
                 <p className="form-trust-text">🔒 Your data is 100% secure with us.</p>
               </form>
             )}
+            </div>
           </div>
         </div>
 
