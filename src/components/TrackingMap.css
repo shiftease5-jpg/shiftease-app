@@ -4,6 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   z-index: 9999;
   background: #f1f5f9;
   display: flex;
@@ -116,7 +117,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  max-height: 70vh;
+  max-height: 50dvh;
   overflow-y: auto;
   background: white;
   border-radius: 24px 24px 0 0;
@@ -146,7 +147,7 @@
     left: 24px;
     width: 440px;
     border-radius: 20px;
-    max-height: calc(100vh - 48px);
+    max-height: calc(100dvh - 48px);
   }
 }
 
@@ -288,6 +289,10 @@
   font-size: 1rem;
   color: #334155;
   border: 1px solid #cbd5e1;
+  white-space: nowrap;
+  max-width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .driver-stats-row {
