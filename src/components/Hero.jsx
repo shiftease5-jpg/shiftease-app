@@ -5,7 +5,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Hero.css';
 
-export default function Hero({ city }) {
+export default function Hero({ city, serviceName }) {
   const [formData, setFormData] = useState({ name: '', from: city || '', to: '', date: '', size: '1 BHK', phone: '' });
   const [status, setStatus] = useState('idle');
   const [quoteResult, setQuoteResult] = useState(null);
@@ -71,14 +71,20 @@ export default function Hero({ city }) {
           </div>
 
           <h1 className="hero-title">
-            {city ? `Premium Packers and Movers in ` : `Modern, Transparent `}
-            <span className="text-gradient">{city ? city : 'Relocation.'}</span>
+            {serviceName 
+              ? `Premium ` 
+              : city ? `Premium Packers and Movers in ` : `Modern, Transparent `}
+            <span className="text-gradient">
+              {serviceName ? `${serviceName}.` : city ? `${city}.` : 'Relocation.'}
+            </span>
           </h1>
           
           <p className="hero-subtitle">
-            {city 
-              ? `Safe relocation in ${city} with live GPS tracking, trained professionals, and honest pricing.`
-              : `Safe relocation with live GPS tracking, trained professionals, and honest pricing. No surprises.`}
+            {serviceName
+              ? `Professional ${serviceName.toLowerCase()} with live GPS tracking, trained professionals, and honest pricing.`
+              : city 
+                ? `Safe relocation in ${city} with live GPS tracking, trained professionals, and honest pricing.`
+                : `Safe relocation with live GPS tracking, trained professionals, and honest pricing. No surprises.`}
           </p>
 
           <button 

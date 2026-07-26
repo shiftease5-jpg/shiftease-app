@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Hero from './Hero';
 import Features from './Features';
 import Services from './Services';
@@ -12,8 +13,6 @@ import Testimonials from './Testimonials';
 import FAQ from './FAQ';
 import Footer from './Footer';
 import FloatingActions from './FloatingActions';
-import SEO from './SEO';
-import SchemaInjector from './SchemaInjector';
 
 // Helper to format city names (mumbai -> Mumbai)
 const formatCity = (city) => {
@@ -25,26 +24,35 @@ export default function CityLandingPage() {
   const { city } = useParams();
   const formattedCity = formatCity(city);
   
-  const seoTitle = `Packers and Movers in ${formattedCity} | Shift Ease`;
+  const seoTitle = `Packers and Movers in ${formattedCity} | ShiftEase`;
   const seoDesc = `Affordable and trusted packers and movers in ${formattedCity} with live GPS tracking, secure packing, and transparent pricing. Get a free quote today.`;
   
   const localBusinessSchema = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "MovingCompany",
     "name": `ShiftEase Packers and Movers ${formattedCity}`,
-    "image": "https://shiftease.com/logo.png",
-    "telephone": "+919876543210",
+    "url": `https://shiftease.in/packers-and-movers-${city}`,
+    "telephone": ["+919797820423", "+919967728718"],
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": formattedCity,
+      "streetAddress": "Lokhandwala",
+      "addressLocality": "Kandivali East, Mumbai",
+      "addressRegion": "Maharashtra",
+      "postalCode": "400101",
       "addressCountry": "IN"
     }
   };
 
   return (
     <>
-      <SEO title={seoTitle} description={seoDesc} />
-      <SchemaInjector schemaData={localBusinessSchema} />
+      <Helmet>
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDesc} />
+        <link rel="canonical" href={`https://shiftease.in/packers-and-movers-${city}`} />
+        <script type="application/ld+json">
+          {JSON.stringify(localBusinessSchema)}
+        </script>
+      </Helmet>
       <main>
         {/* Pass city to components that need dynamic text */}
         <Hero city={formattedCity} />

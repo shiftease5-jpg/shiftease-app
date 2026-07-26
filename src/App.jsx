@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
+import { HelmetProvider, Helmet } from 'react-helmet-async';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Features from './components/Features';
@@ -22,11 +22,16 @@ import Blog from './components/Blog';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
 import CityLandingPage from './components/CityLandingPage';
+import ServiceLandingPage from './components/ServiceLandingPage';
 import BlogPost from './components/BlogPost';
 
 function LandingPage() {
   return (
     <>
+      <Helmet>
+        <title>Packers and Movers in Mumbai | ShiftEase</title>
+        <meta name="description" content="Professional Packers and Movers in Mumbai with live GPS tracking, transparent pricing, secure packing and affordable relocation. Get a free quote today." />
+      </Helmet>
       <main>
         <Hero />
         <Features />
@@ -53,6 +58,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/packers-and-movers-:city" element={<CityLandingPage />} />
+          <Route path="/service/:serviceId" element={<ServiceLandingPage />} />
           <Route path="/track" element={<TrackingMap />} />
           <Route path="/driver" element={<DriverPortal />} />
           <Route path="/driver/dashboard" element={<DriverDashboard />} />
