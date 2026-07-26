@@ -60,7 +60,7 @@ export default function Navbar() {
             🟢 24/7 Support
           </a>
           
-          <div className="mobile-only-btn" style={{display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '8px'}}>
+          <div className="mobile-only-btn" style={{flexDirection: 'column', gap: '8px', marginTop: '8px'}}>
             <Link to="/driver" onClick={closeMenu} className="btn-secondary" style={{textDecoration: 'none', textAlign: 'center'}}>Driver Portal</Link>
             <button onClick={handleQuoteClick} className="btn-primary" style={{width: '100%'}}>
               Get a Quote

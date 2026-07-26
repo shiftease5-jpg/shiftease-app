@@ -196,6 +196,7 @@ button {
   font-weight: 500;
   color: var(--text-main);
   transition: var(--transition);
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
