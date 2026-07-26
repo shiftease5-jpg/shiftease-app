@@ -190,7 +190,7 @@ export default function DriverDashboard() {
       setTimeout(() => {
         setButtonState('success');
         setStatus('ontrip');
-        startRealTracking(); // Launch real GPS tracking
+        startSimulatedTracking(); // Launch simulated driving
         setTimeout(() => setButtonState('idle'), 2000);
       }, 1500);
     }
@@ -200,7 +200,7 @@ export default function DriverDashboard() {
     setStatus('offline');
     setButtonState('idle');
     setSpeed(0);
-    if (watchIdRef.current) navigator.geolocation.clearWatch(watchIdRef.current);
+    if (watchIdRef.current) clearInterval(watchIdRef.current);
     if (socketRef.current) socketRef.current.emit('driverTripEnded', { trackingId: driver.trackingId });
     if (jobDetails) setPosition(jobDetails.pickupCoords);
     setJobDetails(null); // Clear job details so form shows again
@@ -219,52 +219,67 @@ export default function DriverDashboard() {
     return R * c; 
   };
 
-  const startRealTracking = () => {
+  const startSimulatedTracking = () => {
     if (!jobDetails) return;
     
-    if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser");
-      return;
-    }
-
-    watchIdRef.current = navigator.geolocation.watchPosition(
-      (pos) => {
-        const currentLat = pos.coords.latitude;
-        const currentLng = pos.coords.longitude;
-        // Speed comes in meters/second. Convert to km/h. Fallback to 0 if not moving.
-        const currentSpeed = pos.coords.speed ? Math.round(pos.coords.speed * 3.6) : 0; 
+    const startLat = jobDetails.pickupCoords[0];
+    const startLng = jobDetails.pickupCoords[1];
+    const endLat = jobDetails.dropoffCoords[0];
+    const endLng = jobDetails.dropoffCoords[1];
+    
+    // Total distance in km
+    const totalDistance = getDistanceFromLatLonInKm(startLat, startLng, endLat, endLng);
+    
+    // Simulated speed in km/h (let's say 40 km/h)
+    const simulatedSpeedKmh = 40;
+    setSpeed(simulatedSpeedKmh);
+    
+    // Calculate total time needed to reach destination in seconds
+    const totalTimeSeconds = (totalDistance / simulatedSpeedKmh) * 3600;
+    
+    let currentStep = 0;
+    const intervalMs = 1000; // Update every second
+    const totalSteps = (totalTimeSeconds * 1000) / intervalMs;
+    
+    // To make the demo faster, let's compress time so a 10km trip takes 20 seconds
+    const demoSteps = 40; 
+    
+    watchIdRef.current = setInterval(() => {
+      currentStep++;
+      
+      const progress = currentStep / demoSteps;
+      
+      if (progress >= 1) {
+        // Arrived
+        clearInterval(watchIdRef.current);
+        setPosition([endLat, endLng]);
+        setSpeed(0);
         
-        setPosition([currentLat, currentLng]);
-        setSpeed(currentSpeed);
-
         if (socketRef.current) {
-          socketRef.current.emit('driverLocationUpdate', {
-            trackingId: driver.trackingId,
-            lat: currentLat,
-            lng: currentLng,
-            speed: currentSpeed
-          });
+          socketRef.current.emit('driverTripEnded', { trackingId: driver.trackingId });
         }
-
-        // Check if arrived (within 200 meters of destination)
-        const dist = getDistanceFromLatLonInKm(currentLat, currentLng, jobDetails.dropoffCoords[0], jobDetails.dropoffCoords[1]);
-        if (dist < 0.2) {
-          navigator.geolocation.clearWatch(watchIdRef.current);
-          if (socketRef.current) {
-            socketRef.current.emit('driverTripEnded', { trackingId: driver.trackingId });
-          }
-          setTimeout(() => {
-            alert("🎉 Destination Reached! Trip successfully completed.");
-            handleEndTrip();
-          }, 1500);
-        }
-      },
-      (error) => {
-        console.error("Error getting location", error);
-        alert("Please enable GPS location services to start the trip.");
-      },
-      { enableHighAccuracy: true, maximumAge: 0, timeout: 5000 }
-    );
+        setTimeout(() => {
+          alert("🎉 Destination Reached! Trip successfully completed.");
+          handleEndTrip();
+        }, 1000);
+        return;
+      }
+      
+      // Interpolate current position
+      const currentLat = startLat + (endLat - startLat) * progress;
+      const currentLng = startLng + (endLng - startLng) * progress;
+      
+      setPosition([currentLat, currentLng]);
+      
+      if (socketRef.current) {
+        socketRef.current.emit('driverLocationUpdate', {
+          trackingId: driver.trackingId,
+          lat: currentLat,
+          lng: currentLng,
+          speed: simulatedSpeedKmh
+        });
+      }
+    }, intervalMs);
   };
 
   if (!driver) {
