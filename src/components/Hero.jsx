@@ -85,7 +85,11 @@ export default function Hero({ city }) {
             <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Live GPS Tracking</span></div>
             <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Verified Moving Partners</span></div>
             <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Secure Packing Materials</span></div>
-            <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>24×7 Customer Support</span></div>
+            <a href="tel:+919967728718" style={{ textDecoration: 'none' }}>
+              <div className="trust-item" style={{ cursor: 'pointer' }}>
+                <CheckCircle2 size={20} color="#10B981" /> <span style={{ color: 'var(--secondary-color)', fontWeight: '600', textDecoration: 'underline' }}>24×7 Support: Call Us</span>
+              </div>
+            </a>
             <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Dedicated Coordinator</span></div>
           </div>
         </div>
