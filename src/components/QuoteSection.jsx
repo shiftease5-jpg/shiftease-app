@@ -8,7 +8,7 @@ export default function QuoteSection({ city }) {
   const handleWhatsApp = (e) => {
     e.preventDefault();
     const text = `Hi, I need a quote for moving.\nFrom: ${formData.from}\nTo: ${formData.to}\nDate: ${formData.date}\nSize: ${formData.size}`;
-    window.open(`https://wa.me/919797820423?text=${encodeURIComponent(text)}`, '_blank');
+    window.open(`https://wa.me/919967728718?text=${encodeURIComponent(text)}`, '_blank');
   };
 
   return (

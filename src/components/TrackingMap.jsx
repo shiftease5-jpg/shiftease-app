@@ -212,12 +212,12 @@ export default function TrackingMap() {
           </div>
 
           {/* Action Buttons Grid */}
-          <div className="action-grid">
-            <button className="action-btn primary" onClick={() => window.location.href = 'tel:+919876543210'}>
-              <Phone size={20} /> Call
+          <div className="driver-actions">
+            <button className="action-btn primary" onClick={() => window.location.href = 'tel:+919967728718'}>
+              <Phone size={16} /> Call Driver
             </button>
-            <button className="action-btn success" onClick={() => window.open('https://wa.me/919876543210', '_blank')}>
-              <MessageCircle size={20} /> WhatsApp
+            <button className="action-btn success" onClick={() => window.open('https://wa.me/919967728718', '_blank')}>
+              <MessageSquare size={16} /> WhatsApp
             </button>
             <button className="action-btn warning" onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${position[0]},${position[1]}`, '_blank')}>
               <MapIcon size={20} /> Navigate

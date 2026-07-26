@@ -2,8 +2,8 @@ import { Phone, MessageCircle } from 'lucide-react';
 // We rely on index.css for global floating action styles now
 
 export default function FloatingActions() {
-  const whatsappNumber = "919797820423";
-  const phoneNumber = "919797820423";
+  const whatsappNumber = "919967728718";
+  const phoneNumber = "919967728718";
 
   return (
     <div className="floating-actions">
