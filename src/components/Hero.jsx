@@ -34,7 +34,7 @@ export default function Hero({ city, serviceName }) {
           </div>
           
           <div className="hero-trust-metrics fade-in-up" style={{animationDelay: '0.4s'}}>
-            <div className="trust-metric">✓ Fixed Pricing</div>
+            <div className="trust-metric">✓ Transparent Pricing</div>
             <div className="trust-metric">✓ Live GPS Tracking</div>
             <div className="trust-metric">✓ Insured Moving</div>
           </div>

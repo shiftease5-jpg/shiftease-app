@@ -53,7 +53,7 @@ export default function Navbar() {
 
         <nav className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
           <Link to="/" onClick={handleHomeClick}>Home</Link>
-          <a href="/#about" onClick={closeMenu}>Why ShiftEase</a>
+          <a href="/#trust" onClick={closeMenu}>Why ShiftEase</a>
           <a href="/#services" onClick={closeMenu}>Services</a>
           <Link to="/track" onClick={closeMenu} style={{color: 'var(--secondary-color)', fontWeight: 'bold'}}>Live Tracking</Link>
           <a href="tel:+919967728718" onClick={closeMenu} style={{fontWeight: '500'}}>
