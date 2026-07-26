@@ -53,6 +53,7 @@ export default function Navbar() {
 
         <nav className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
           <Link to="/" onClick={handleHomeClick}>Home</Link>
+          <a href="/#about" onClick={closeMenu}>Why Us</a>
           <a href="/#services" onClick={closeMenu}>Services</a>
           <Link to="/track" onClick={closeMenu} style={{color: 'var(--secondary-color)', fontWeight: 'bold'}}>Live Truck Tracking</Link>
           <a href="tel:+919967728718" onClick={closeMenu} style={{color: '#10B981', fontWeight: 'bold'}}>24/7 Support</a>
