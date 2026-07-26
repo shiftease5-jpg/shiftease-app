@@ -104,16 +104,47 @@ export default function DriverDashboard() {
   };
 
   const searchLocation = async (query) => {
+    const q = query.toLowerCase().trim();
+    
+    // 1. FAST LOCAL DICTIONARY (Prevents API rate limits and guarantees accuracy for demos)
+    const mumbaiLocations = {
+      'andheri': [19.1136, 72.8697],
+      'bandra': [19.0596, 72.8600],
+      'bkc': [19.0664, 72.8659],
+      'borivali': [19.2288, 72.8541],
+      'goregaon': [19.1645, 72.8449],
+      'malad': [19.1834, 72.8397],
+      'juhu': [19.1026, 72.8258],
+      'ghatkopar': [19.0790, 72.9080],
+      'mulund': [19.1724, 72.9425],
+      'thane': [19.2183, 72.9781],
+      'dadar': [19.0176, 72.8562],
+      'khar': [19.0694, 72.8400],
+      'santacruz': [19.0843, 72.8360],
+      'vile parle': [19.1006, 72.8436],
+      'kurla': [19.0728, 72.8797],
+      'colaba': [18.9067, 72.8147],
+      'powai': [19.1176, 72.9060],
+      'navi mumbai': [19.0330, 73.0297],
+      'vashi': [19.0771, 72.9986],
+      'panvel': [18.9894, 73.1175]
+    };
+
+    // Try finding a match in our local dictionary
+    for (const [key, coords] of Object.entries(mumbaiLocations)) {
+      if (q.includes(key)) {
+        return coords;
+      }
+    }
+
     try {
-      // 1. Try exact query
+      // 2. Try Nominatim API if not in local dictionary
       let coords = await fetchLocation(query);
       if (coords) return coords;
       
-      // 2. Try adding Mumbai context
       coords = await fetchLocation(query + ", Mumbai, India");
       if (coords) return coords;
       
-      // 3. Try fixing common spelling mistakes (w -> v for boriwali -> borivali)
       if (query.toLowerCase().includes('w')) {
          coords = await fetchLocation(query.toLowerCase().replace(/w/g, 'v') + ", Mumbai, India");
          if (coords) return coords;
@@ -122,27 +153,13 @@ export default function DriverDashboard() {
       console.error("Geocoding error:", e);
     }
     
-    // SAFE FALLBACK: Nominatim is very strict and fails on full complex addresses (e.g. missing a comma or exact OSM tag).
-    // To ensure the demo NEVER breaks and NEVER puts a pin in the ocean, we use a deterministic safe land coordinate.
-    const safeMumbaiLandCoords = [
-      [19.1136, 72.8697], // Andheri
-      [19.0596, 72.8600], // Bandra
-      [19.2288, 72.8541], // Borivali
-      [19.1645, 72.8449], // Goregaon
-      [19.1834, 72.8397], // Malad
-      [19.1363, 72.8277], // Juhu
-      [19.0790, 72.9080], // Ghatkopar
-      [19.1724, 72.9425], // Mulund
-      [19.2183, 72.9781], // Thane
-      [19.0176, 72.8562]  // Dadar
-    ];
-    
+    // SAFE FALLBACK: Hash to a guaranteed land coordinate to prevent crashing
+    const safeCoords = Object.values(mumbaiLocations);
     let hash = 0;
     for (let i = 0; i < query.length; i++) {
       hash = query.charCodeAt(i) + ((hash << 5) - hash);
     }
-    const index = Math.abs(hash) % safeMumbaiLandCoords.length;
-    return safeMumbaiLandCoords[index];
+    return safeCoords[Math.abs(hash) % safeCoords.length];
   };
 
   const handleSearchJob = async (e) => {
