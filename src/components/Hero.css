@@ -90,6 +90,28 @@
   font-size: 1.05rem;
 }
 
+.hero-desktop-ctas {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.hero-trust-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 16px;
+}
+
+.trust-indicator-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
 
 /* Right Side Form Wrapper */
 .hero-form-wrapper {
@@ -314,6 +336,13 @@
   .hero {
     padding-top: 90px;
     padding-bottom: 20px;
+  }
+  .hero-desktop-ctas {
+    display: none;
+  }
+  .hero-trust-indicators {
+    flex-direction: column;
+    gap: 12px;
   }
   .hero-mobile-visual {
     display: flex;

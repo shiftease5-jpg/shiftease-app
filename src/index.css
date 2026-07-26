@@ -172,6 +172,11 @@ button {
   gap: 24px;
 }
 
+.nav-btn-group {
+  display: flex;
+  gap: 12px;
+}
+
 .logo {
   font-family: 'Outfit', sans-serif;
   font-size: 1.75rem;

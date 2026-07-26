@@ -93,7 +93,7 @@ export default function Hero({ city }) {
             🔒 Free quote • No hidden charges • Response in minutes
           </p>
 
-          <div className="hero-desktop-ctas" style={{display: 'flex', gap: '16px', marginBottom: '32px'}}>
+          <div className="hero-desktop-ctas">
             <button className="btn-primary" onClick={() => document.getElementById('quote-form')?.scrollIntoView({ behavior: 'smooth' })}>
               <span style={{marginRight: '6px'}}>🟧</span> Book Free Survey
             </button>
@@ -102,14 +102,14 @@ export default function Hero({ city }) {
             </button>
           </div>
 
-          <div className="hero-trust-indicators" style={{display: 'flex', flexWrap: 'wrap', gap: '24px', marginTop: '16px'}}>
-            <div style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: '500'}}>
+          <div className="hero-trust-indicators">
+            <div className="trust-indicator-item">
               <span>⭐⭐⭐⭐⭐</span> Rated by Customers
             </div>
-            <div style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: '500'}}>
+            <div className="trust-indicator-item">
               <CheckCircle2 size={18} color="#10B981" /> No Hidden Charges
             </div>
-            <div style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: '500'}}>
+            <div className="trust-indicator-item">
               <MapPin size={18} color="#f97316" /> Serving Across India
             </div>
           </div>

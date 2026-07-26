@@ -68,7 +68,7 @@ export default function Navbar() {
           </div>
         </nav>
 
-        <div className="nav-btn-group nav-btn" style={{ display: 'flex', gap: '12px' }}>
+        <div className="nav-btn-group nav-btn">
           <Link to="/driver" className="btn-secondary" style={{ textDecoration: 'none' }}>
             Driver Portal
           </Link>
