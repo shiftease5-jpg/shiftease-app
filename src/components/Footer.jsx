@@ -3,13 +3,16 @@ import {
   DollarSign, Clock, ArrowRight, Home, Briefcase, 
   Car, Package, HelpCircle, FileText, Info, Truck, CheckCircle2
 } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Footer.css';
 
 export default function Footer() {
+  const navigate = useNavigate();
+  
   const handleScroll = (e, id) => {
     e.preventDefault();
     if (window.location.pathname !== '/') {
-      window.location.href = `/${id}`;
+      navigate(`/${id}`);
       return;
     }
     const element = document.getElementById(id.replace('#', ''));
@@ -91,24 +94,24 @@ export default function Footer() {
             <div className="footer-col">
               <h4>SERVICES</h4>
               <ul className="footer-links">
-                <li><a href="/service/house-shifting"><Home size={16} className="link-icon" /> <span>House Shifting</span></a></li>
-                <li><a href="/service/office-relocation"><Briefcase size={16} className="link-icon" /> <span>Office Relocation</span></a></li>
-                <li><a href="/service/bike-transport"><Car size={16} className="link-icon" /> <span>Bike Transport</span></a></li>
-                <li><a href="/service/car-transport"><Car size={16} className="link-icon" /> <span>Car Transport</span></a></li>
-                <li><a href="/service/packing-services"><Package size={16} className="link-icon" /> <span>Packing Services</span></a></li>
-                <li><a href="/service/storage-services"><Package size={16} className="link-icon" /> <span>Storage Services</span></a></li>
+                <li><Link to="/service/house-shifting"><Home size={16} className="link-icon" /> <span>House Shifting</span></Link></li>
+                <li><Link to="/service/office-relocation"><Briefcase size={16} className="link-icon" /> <span>Office Relocation</span></Link></li>
+                <li><Link to="/service/bike-transport"><Car size={16} className="link-icon" /> <span>Bike Transport</span></Link></li>
+                <li><Link to="/service/car-transport"><Car size={16} className="link-icon" /> <span>Car Transport</span></Link></li>
+                <li><Link to="/service/packing-services"><Package size={16} className="link-icon" /> <span>Packing Services</span></Link></li>
+                <li><Link to="/service/storage-services"><Package size={16} className="link-icon" /> <span>Storage Services</span></Link></li>
               </ul>
             </div>
             
             <div className="footer-col">
               <h4>SERVICE AREAS</h4>
               <ul className="footer-links">
-                <li><a href="/packers-and-movers-mumbai"><MapPin size={16} className="link-icon" /> <span>Mumbai</span></a></li>
-                <li><a href="/packers-and-movers-andheri"><MapPin size={16} className="link-icon" /> <span>Andheri</span></a></li>
-                <li><a href="/packers-and-movers-bandra"><MapPin size={16} className="link-icon" /> <span>Bandra</span></a></li>
-                <li><a href="/packers-and-movers-thane"><MapPin size={16} className="link-icon" /> <span>Thane</span></a></li>
-                <li><a href="/packers-and-movers-navi-mumbai"><MapPin size={16} className="link-icon" /> <span>Navi Mumbai</span></a></li>
-                <li><a href="/packers-and-movers-pune"><MapPin size={16} className="link-icon" /> <span>Pune</span></a></li>
+                <li><Link to="/packers-and-movers-mumbai"><MapPin size={16} className="link-icon" /> <span>Mumbai</span></Link></li>
+                <li><Link to="/packers-and-movers-andheri"><MapPin size={16} className="link-icon" /> <span>Andheri</span></Link></li>
+                <li><Link to="/packers-and-movers-bandra"><MapPin size={16} className="link-icon" /> <span>Bandra</span></Link></li>
+                <li><Link to="/packers-and-movers-thane"><MapPin size={16} className="link-icon" /> <span>Thane</span></Link></li>
+                <li><Link to="/packers-and-movers-navi-mumbai"><MapPin size={16} className="link-icon" /> <span>Navi Mumbai</span></Link></li>
+                <li><Link to="/packers-and-movers-pune"><MapPin size={16} className="link-icon" /> <span>Pune</span></Link></li>
               </ul>
             </div>
             
@@ -116,7 +119,7 @@ export default function Footer() {
               <h4>COMPANY</h4>
               <ul className="footer-links">
                 <li><a href="#about" onClick={(e) => handleScroll(e, '#about')}><Info size={16} className="link-icon" /> <span>About Us</span></a></li>
-                <li><a href="/blog"><FileText size={16} className="link-icon" /> <span>Blog</span></a></li>
+                <li><Link to="/blog"><FileText size={16} className="link-icon" /> <span>Blog</span></Link></li>
                 <li><a href="#contact" onClick={(e) => handleScroll(e, '#contact')}><Mail size={16} className="link-icon" /> <span>Contact</span></a></li>
               </ul>
             </div>
@@ -125,8 +128,8 @@ export default function Footer() {
               <h4>SUPPORT</h4>
               <ul className="footer-links">
                 <li><a href="#faq" onClick={(e) => handleScroll(e, '#faq')}><HelpCircle size={16} className="link-icon" /> <span>FAQ</span></a></li>
-                <li><a href="/privacy"><ShieldCheck size={16} className="link-icon" /> <span>Privacy Policy</span></a></li>
-                <li><a href="/terms"><FileText size={16} className="link-icon" /> <span>Terms of Service</span></a></li>
+                <li><Link to="/privacy"><ShieldCheck size={16} className="link-icon" /> <span>Privacy Policy</span></Link></li>
+                <li><Link to="/terms"><FileText size={16} className="link-icon" /> <span>Terms of Service</span></Link></li>
               </ul>
             </div>
             
