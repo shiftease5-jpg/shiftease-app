@@ -182,6 +182,7 @@ button {
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 32px;
 }
 
