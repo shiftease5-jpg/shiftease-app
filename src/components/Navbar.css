@@ -1,28 +1,33 @@
 .mobile-open {
   display: flex !important;
   flex-direction: column;
-  position: absolute;
+  position: fixed;
   top: 70px;
   left: 0;
   right: 0;
-  background: var(--surface-color);
-  padding: 16px;
-  box-shadow: var(--shadow-lg);
-  gap: 16px;
-  text-align: center;
-  border-radius: 0 0 16px 16px;
+  bottom: 0;
+  background: #ffffff;
+  padding: 32px 24px;
+  gap: 24px;
+  text-align: left;
+  border-radius: 0;
   z-index: 200;
-  animation: slideDown 0.2s ease-out forwards;
+  overflow-y: auto;
+  box-shadow: none;
+  animation: slideDown 0.3s ease-out forwards;
 }
 
-.mobile-open a {
-  font-size: 1.125rem;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-.mobile-open a:last-of-type {
+.mobile-open a:not(.btn-primary) {
+  font-size: 1.75rem !important;
+  font-weight: 600 !important;
+  color: #1d1d1f !important;
+  padding: 4px 0;
   border-bottom: none;
+  text-decoration: none;
+}
+
+.mobile-open a:hover {
+  color: #f97316;
 }
 
 @keyframes slideDown {
@@ -48,16 +53,7 @@
 }
 
 .mobile-menu-backdrop {
-  position: fixed;
-  top: 70px; /* Below header */
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(15, 23, 42, 0.4); /* Dark overlay */
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  z-index: 150;
-  animation: fadeIn 0.2s ease-out forwards;
+  display: none;
 }
 
 @keyframes fadeIn {
