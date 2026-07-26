@@ -21,8 +21,7 @@ const formatCity = (city) => {
   return city.charAt(0).toUpperCase() + city.slice(1).replace(/-/g, ' ');
 };
 
-export default function CityLandingPage() {
-  const { city } = useParams();
+export default function CityLandingPage({ city }) {
   const formattedCity = formatCity(city);
   
   const seoTitle = `Packers and Movers in ${formattedCity} | ShiftEase`;

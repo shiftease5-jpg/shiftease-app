@@ -25,6 +25,19 @@ import Terms from './components/Terms';
 import CityLandingPage from './components/CityLandingPage';
 import ServiceLandingPage from './components/ServiceLandingPage';
 import BlogPost from './components/BlogPost';
+import { useParams, Navigate } from 'react-router-dom';
+
+function DynamicRouteHandler() {
+  const { slug } = useParams();
+  
+  if (slug && slug.startsWith('packers-and-movers-')) {
+    const city = slug.replace('packers-and-movers-', '');
+    return <CityLandingPage city={city} />;
+  }
+  
+  // If no match, redirect to home or 404
+  return <Navigate to="/" replace />;
+}
 
 function LandingPage() {
   return (
@@ -59,7 +72,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/packers-and-movers-:city" element={<CityLandingPage />} />
+          <Route path="/:slug" element={<DynamicRouteHandler />} />
           <Route path="/service/:serviceId" element={<ServiceLandingPage />} />
           <Route path="/track" element={<TrackingMap />} />
           <Route path="/driver" element={<DriverPortal />} />
