@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Menu, Truck, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 export default function Navbar() {
+  const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -24,6 +25,10 @@ export default function Navbar() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  if (location.pathname.startsWith('/admin') || location.pathname.startsWith('/driver')) {
+    return null;
+  }
 
   const handleQuoteClick = (e) => {
     e.preventDefault();

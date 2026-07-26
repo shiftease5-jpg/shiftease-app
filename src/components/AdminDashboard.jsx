@@ -8,6 +8,7 @@ export default function AdminDashboard() {
   const [drivers, setDrivers] = useState([]);
   const [quotes, setQuotes] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('Overview');
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -76,10 +77,10 @@ export default function AdminDashboard() {
       <aside className="admin-sidebar">
         <div className="admin-brand">ShiftEase<span>Admin</span></div>
         <nav className="admin-nav">
-          <a href="#" className="active"><FileText size={20}/> Overview</a>
-          <a href="#"><Users size={20}/> Customers</a>
-          <a href="#"><Truck size={20}/> Drivers</a>
-          <a href="#"><IndianRupee size={20}/> Financials</a>
+          <a href="#" className={activeTab === 'Overview' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('Overview'); }}><FileText size={20}/> Overview</a>
+          <a href="#" className={activeTab === 'Customers' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('Customers'); }}><Users size={20}/> Customers</a>
+          <a href="#" className={activeTab === 'Drivers' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('Drivers'); }}><Truck size={20}/> Drivers</a>
+          <a href="#" className={activeTab === 'Financials' ? 'active' : ''} onClick={(e) => { e.preventDefault(); setActiveTab('Financials'); }}><IndianRupee size={20}/> Financials</a>
         </nav>
         <button className="admin-logout" onClick={() => setIsAuthenticated(false)}>
           <LogOut size={20}/> Logout
@@ -100,124 +101,139 @@ export default function AdminDashboard() {
         </div>
 
         {/* KPIs */}
-        <div className="admin-kpi-grid">
-          <div className="kpi-card">
-            <div className="kpi-icon blue"><FileText size={24}/></div>
-            <div className="kpi-data">
-              <p>Total Quotes</p>
-              <h3>{quotes.length + 142}</h3>
+        {(activeTab === 'Overview' || activeTab === 'Financials') && (
+          <div className="admin-kpi-grid">
+            <div className="kpi-card">
+              <div className="kpi-icon blue"><FileText size={24}/></div>
+              <div className="kpi-data">
+                <p>Total Quotes</p>
+                <h3>{quotes.length + 142}</h3>
+              </div>
+            </div>
+            <div className="kpi-card">
+              <div className="kpi-icon green"><Truck size={24}/></div>
+              <div className="kpi-data">
+                <p>Active Drivers</p>
+                <h3>{drivers.filter(d => d.status !== 'Offline').length || 12}</h3>
+              </div>
+            </div>
+            <div className="kpi-card">
+              <div className="kpi-icon orange"><IndianRupee size={24}/></div>
+              <div className="kpi-data">
+                <p>Monthly Revenue</p>
+                <h3>₹8.4L</h3>
+              </div>
+            </div>
+            <div className="kpi-card">
+              <div className="kpi-icon purple"><Users size={24}/></div>
+              <div className="kpi-data">
+                <p>Registered Users</p>
+                <h3>842</h3>
+              </div>
             </div>
           </div>
-          <div className="kpi-card">
-            <div className="kpi-icon green"><Truck size={24}/></div>
-            <div className="kpi-data">
-              <p>Active Drivers</p>
-              <h3>{drivers.filter(d => d.status !== 'Offline').length || 12}</h3>
-            </div>
-          </div>
-          <div className="kpi-card">
-            <div className="kpi-icon orange"><IndianRupee size={24}/></div>
-            <div className="kpi-data">
-              <p>Monthly Revenue</p>
-              <h3>₹8.4L</h3>
-            </div>
-          </div>
-          <div className="kpi-card">
-            <div className="kpi-icon purple"><Users size={24}/></div>
-            <div className="kpi-data">
-              <p>Registered Users</p>
-              <h3>842</h3>
-            </div>
-          </div>
-        </div>
+        )}
 
         <div className="admin-tables-layout">
           {/* Quotes Table */}
-          <div className="admin-section">
-            <div className="section-header">
-              <h2>Recent Quote Requests</h2>
-              <span className="badge">{quotes.length} New</span>
+          {(activeTab === 'Overview' || activeTab === 'Customers') && (
+            <div className="admin-section" style={{ width: activeTab === 'Customers' ? '100%' : 'auto' }}>
+              <div className="section-header">
+                <h2>{activeTab === 'Customers' ? 'Customer Requests' : 'Recent Quote Requests'}</h2>
+                <span className="badge">{quotes.length} New</span>
+              </div>
+              <div className="table-wrapper">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Route</th>
+                      <th>Move Size</th>
+                      <th>Contact</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {quotes.length === 0 ? (
+                      <tr><td colSpan="5" className="empty-state">No quotes yet.</td></tr>
+                    ) : (
+                      quotes.map((quote, idx) => (
+                        <tr key={quote._id || idx}>
+                          <td>{new Date(quote.createdAt).toLocaleDateString('en-GB')}</td>
+                          <td>
+                            <div className="route-cell">
+                              <span className="city from">{quote.from.split(',')[0]}</span>
+                              <span className="arrow">→</span>
+                              <span className="city to">{quote.to.split(',')[0]}</span>
+                            </div>
+                          </td>
+                          <td><span className="size-badge">{quote.size || '1 BHK'}</span></td>
+                          <td>{quote.phone}</td>
+                          <td><button className="action-link">Assign</button></td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
-            <div className="table-wrapper">
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Route</th>
-                    <th>Move Size</th>
-                    <th>Contact</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {quotes.length === 0 ? (
-                    <tr><td colSpan="5" className="empty-state">No quotes yet.</td></tr>
-                  ) : (
-                    quotes.map((quote, idx) => (
-                      <tr key={quote._id || idx}>
-                        <td>{new Date(quote.createdAt).toLocaleDateString('en-GB')}</td>
-                        <td>
-                          <div className="route-cell">
-                            <span className="city from">{quote.from.split(',')[0]}</span>
-                            <span className="arrow">→</span>
-                            <span className="city to">{quote.to.split(',')[0]}</span>
-                          </div>
-                        </td>
-                        <td><span className="size-badge">{quote.size || '1 BHK'}</span></td>
-                        <td>{quote.phone}</td>
-                        <td><button className="action-link">Assign</button></td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          )}
 
           {/* Drivers Table */}
-          <div className="admin-section">
-            <div className="section-header">
-              <h2>Fleet Status</h2>
-            </div>
-            <div className="table-wrapper">
-              <table className="admin-table">
-                <thead>
-                  <tr>
-                    <th>Driver</th>
-                    <th>Vehicle</th>
-                    <th>Tracking ID</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {drivers.length === 0 ? (
-                    <tr><td colSpan="4" className="empty-state">No drivers registered.</td></tr>
-                  ) : (
-                    drivers.map((driver, idx) => (
-                      <tr key={driver._id || idx}>
-                        <td>
-                          <div className="driver-name-cell">
-                            <div className="avatar-small">{driver.name.charAt(0)}</div>
-                            <div>
-                              <strong>{driver.name}</strong>
-                              <span className="subtext">{driver.phone}</span>
+          {(activeTab === 'Overview' || activeTab === 'Drivers') && (
+            <div className="admin-section" style={{ width: activeTab === 'Drivers' ? '100%' : 'auto' }}>
+              <div className="section-header">
+                <h2>Fleet Status</h2>
+              </div>
+              <div className="table-wrapper">
+                <table className="admin-table">
+                  <thead>
+                    <tr>
+                      <th>Driver</th>
+                      <th>Vehicle</th>
+                      <th>Tracking ID</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {drivers.length === 0 ? (
+                      <tr><td colSpan="4" className="empty-state">No drivers registered.</td></tr>
+                    ) : (
+                      drivers.map((driver, idx) => (
+                        <tr key={driver._id || idx}>
+                          <td>
+                            <div className="driver-name-cell">
+                              <div className="avatar-small">{driver.name.charAt(0)}</div>
+                              <div>
+                                <strong>{driver.name}</strong>
+                                <span className="subtext">{driver.phone}</span>
+                              </div>
                             </div>
-                          </div>
-                        </td>
-                        <td><span className="plate-badge">{driver.vehicle}</span></td>
-                        <td className="tracking-id-cell">{driver.trackingId}</td>
-                        <td>
-                          <span className={`status-badge ${driver.status?.toLowerCase().replace(' ', '') || 'offline'}`}>
-                            {driver.status || 'Offline'}
-                          </span>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
+                          </td>
+                          <td><span className="plate-badge">{driver.vehicle}</span></td>
+                          <td className="tracking-id-cell">{driver.trackingId}</td>
+                          <td>
+                            <span className={`status-badge ${driver.status?.toLowerCase().replace(' ', '') || 'offline'}`}>
+                              {driver.status || 'Offline'}
+                            </span>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          )}
+          
+          {/* Financials Placeholder */}
+          {activeTab === 'Financials' && (
+            <div className="admin-section" style={{ width: '100%', textAlign: 'center', padding: '60px' }}>
+              <IndianRupee size={48} color="#94a3b8" style={{ marginBottom: '16px' }} />
+              <h2 style={{ color: '#f8fafc', marginBottom: '8px' }}>Detailed Financial Reports</h2>
+              <p style={{ color: '#94a3b8' }}>Advanced revenue tracking, driver payouts, and expense management will be available here.</p>
+            </div>
+          )}
         </div>
       </main>
     </div>
