@@ -1,0 +1,203 @@
+.tracking-preview-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.tracking-preview-text {
+  flex: 1;
+}
+
+.tracking-preview-text .section-title {
+  text-align: left;
+  margin-bottom: 24px;
+}
+
+.tracking-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tracking-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+  color: #e2e8f0;
+}
+
+.tracking-preview-visual {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.mock-phone {
+  width: 320px;
+  height: 600px;
+  background: white;
+  border-radius: 40px;
+  padding: 12px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.4), inset 0 0 0 8px #1e293b;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mock-map {
+  flex: 1;
+  background: #eef2f6;
+  border-radius: 28px 28px 0 0;
+  position: relative;
+  background-image: 
+    linear-gradient(#cbd5e1 1px, transparent 1px),
+    linear-gradient(90deg, #cbd5e1 1px, transparent 1px);
+  background-size: 40px 40px;
+  overflow: hidden;
+}
+
+.mock-route-line {
+  position: absolute;
+  top: 40%;
+  left: 20%;
+  width: 60%;
+  height: 40%;
+  border-left: 4px dashed var(--primary-color);
+  border-bottom: 4px dashed var(--primary-color);
+  border-bottom-left-radius: 20px;
+}
+
+.mock-truck-marker {
+  position: absolute;
+  top: 35%;
+  left: 15%;
+  font-size: 24px;
+  z-index: 2;
+  animation: moveTruck 4s linear infinite alternate;
+}
+
+@keyframes moveTruck {
+  0% { top: 35%; left: 15%; }
+  100% { top: 75%; left: 75%; }
+}
+
+.mock-truck-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(14, 165, 233, 0.3);
+  border-radius: 50%;
+  animation: pulsePulse 2s infinite;
+  z-index: -1;
+}
+
+@keyframes pulsePulse {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+.mock-destination-marker {
+  position: absolute;
+  top: 70%;
+  left: 77%;
+}
+
+.mock-phone-panel {
+  background: white;
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 -10px 20px rgba(0,0,0,0.05);
+  margin-top: -20px;
+  position: relative;
+  z-index: 10;
+}
+
+.mock-driver-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+}
+
+.mock-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #cbd5e1;
+}
+
+.mock-call-btn {
+  width: 40px;
+  height: 40px;
+  background: #10b981;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);
+}
+
+@media (max-width: 992px) {
+  .tracking-preview-layout {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .tracking-preview-text .section-title {
+    text-align: center !important;
+  }
+  
+  .tracking-preview-text p {
+    text-align: center !important;
+  }
+  
+  .tracking-benefits {
+    display: inline-block;
+    text-align: left;
+  }
+}
+
+/* Animations */
+.float-animation {
+  animation: floatingPhone 6s ease-in-out infinite;
+  box-shadow: 0 40px 100px rgba(14, 165, 233, 0.2), inset 0 0 0 8px #1e293b;
+}
+
+@keyframes floatingPhone {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(-1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border-color: #38bdf8;
+}
+
+.pulse-button {
+  animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+  0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(249, 115, 22, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}

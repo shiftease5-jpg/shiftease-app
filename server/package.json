@@ -1,0 +1,17 @@
+{
+  "name": "shiftease-server",
+  "version": "1.0.0",
+  "description": "Real-time tracking WebSocket server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.4.2",
+    "express": "^4.18.2",
+    "mongoose": "^9.8.0",
+    "socket.io": "^4.7.4"
+  }
+}

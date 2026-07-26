@@ -1,0 +1,52 @@
+.bg-light {
+  background-color: #FFFFFF;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+}
+
+.feature-card {
+  padding: 32px;
+  border-radius: 16px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.feature-icon {
+  width: 72px;
+  height: 72px;
+  background-color: rgba(249, 115, 22, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px auto;
+  transition: var(--transition);
+}
+
+.feature-card:hover .feature-icon {
+  background-color: var(--secondary-color);
+}
+
+.feature-card:hover .feature-icon svg {
+  stroke: white;
+}
+
+.feature-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 16px;
+}
+
+.feature-card p {
+  color: var(--text-light);
+  font-size: 1rem;
+}
