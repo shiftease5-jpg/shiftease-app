@@ -53,10 +53,13 @@ export default function Navbar() {
 
         <nav className={`nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`}>
           <Link to="/" onClick={handleHomeClick}>Home</Link>
-          <a href="/#about" onClick={closeMenu}>Why Us</a>
+          <a href="/#about" onClick={closeMenu}>Why ShiftEase</a>
           <a href="/#services" onClick={closeMenu}>Services</a>
-          <Link to="/track" onClick={closeMenu} style={{color: 'var(--secondary-color)', fontWeight: 'bold'}}>Live Truck Tracking</Link>
-          <a href="tel:+919967728718" onClick={closeMenu} style={{color: '#10B981', fontWeight: 'bold'}}>24/7 Support</a>
+          <Link to="/track" onClick={closeMenu} style={{color: 'var(--secondary-color)', fontWeight: 'bold'}}>Live Tracking</Link>
+          <a href="tel:+919967728718" onClick={closeMenu} style={{display: 'flex', alignItems: 'center', gap: '6px', fontWeight: '500'}}>
+            <span style={{width: '8px', height: '8px', backgroundColor: '#10B981', borderRadius: '50%', display: 'inline-block'}}></span>
+            Support
+          </a>
           <Link to="/driver" onClick={closeMenu} className="btn-primary" style={{textDecoration: 'none'}}>Driver Portal</Link>
           <Link to="/admin" onClick={closeMenu} style={{color: '#94a3b8', fontSize: '0.9rem'}}>Admin</Link>
           <button onClick={handleQuoteClick} className="btn-primary mobile-only-btn">

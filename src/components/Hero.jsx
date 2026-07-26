@@ -93,17 +93,25 @@ export default function Hero({ city }) {
             🔒 Free quote • No hidden charges • Response in minutes
           </p>
 
-          <div className="hero-trust-list">
-            <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Transparent Pricing</span></div>
-            <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Live GPS Tracking</span></div>
-            <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Verified Moving Partners</span></div>
-            <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Secure Packing Materials</span></div>
-            <a href="tel:+919967728718" style={{ textDecoration: 'none' }}>
-              <div className="trust-item" style={{ cursor: 'pointer' }}>
-                <CheckCircle2 size={20} color="#10B981" /> <span style={{ color: 'var(--secondary-color)', fontWeight: '600', textDecoration: 'underline' }}>24×7 Support: Call Us</span>
-              </div>
-            </a>
-            <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Dedicated Coordinator</span></div>
+          <div className="hero-desktop-ctas" style={{display: 'flex', gap: '16px', marginBottom: '32px'}}>
+            <button className="btn-primary" onClick={() => document.getElementById('quote-form')?.scrollIntoView({ behavior: 'smooth' })}>
+              <span style={{marginRight: '6px'}}>🟧</span> Book Free Survey
+            </button>
+            <button className="btn-secondary" onClick={() => document.getElementById('quote-form')?.scrollIntoView({ behavior: 'smooth' })}>
+              <span style={{marginRight: '6px'}}>⚪</span> View Pricing
+            </button>
+          </div>
+
+          <div className="hero-trust-indicators" style={{display: 'flex', flexWrap: 'wrap', gap: '24px', marginTop: '16px'}}>
+            <div style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: '500'}}>
+              <span>⭐⭐⭐⭐⭐</span> Rated by Customers
+            </div>
+            <div style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: '500'}}>
+              <CheckCircle2 size={18} color="#10B981" /> No Hidden Charges
+            </div>
+            <div style={{display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.95rem', color: 'var(--text-main)', fontWeight: '500'}}>
+              <MapPin size={18} color="#f97316" /> Serving Across India
+            </div>
           </div>
         </div>
         
