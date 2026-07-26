@@ -39,6 +39,12 @@ export default function Features({ city }) {
               <div className="feature-icon">{feat.icon}</div>
               <h3>{feat.title}</h3>
               <p>{feat.description}</p>
+              {feat.title === "24/7 Support" && (
+                <div style={{ display: 'flex', gap: '8px', marginTop: '16px', justifyContent: 'center' }}>
+                  <a href="tel:+919967728718" className="btn-secondary" style={{ padding: '8px 12px', fontSize: '0.95rem', flex: 1, textAlign: 'center', borderColor: 'var(--secondary-color)', color: 'var(--secondary-color)' }}>Call Now</a>
+                  <a href="https://wa.me/919967728718" target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '8px 12px', fontSize: '0.95rem', backgroundColor: '#25D366', flex: 1, textAlign: 'center' }}>WhatsApp</a>
+                </div>
+              )}
             </div>
           ))}
         </div>
