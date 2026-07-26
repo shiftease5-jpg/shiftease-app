@@ -69,7 +69,8 @@
 }
 
 .hero-mobile-visual,
-.hero-mobile-cta {
+.hero-mobile-cta,
+.hero-mobile-trust {
   display: none;
 }
 
@@ -223,14 +224,25 @@
   .hero-mobile-visual {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-top: -8px;
+    margin-bottom: 12px;
   }
   .hero-mobile-cta {
-    display: inline-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     width: 100%;
-    margin-bottom: 32px;
+    margin-bottom: 8px;
     font-size: 1.1rem;
     background-color: var(--secondary-color);
+  }
+  .hero-mobile-trust {
+    display: block;
+    font-size: 0.75rem;
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 32px;
   }
   .hero-title {
     font-size: 2.4rem;
@@ -246,7 +258,7 @@
   .hero-trust-list {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-    margin-bottom: 30px;
+    margin-bottom: 80px; /* Add bottom margin so floating buttons don't block text */
   }
   .trust-item {
     font-size: 0.85rem;

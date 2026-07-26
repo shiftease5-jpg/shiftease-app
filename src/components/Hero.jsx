@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ShieldCheck, Truck, Clock, Star, MapPin, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Truck, Clock, Star, MapPin, CheckCircle2, FileText } from 'lucide-react';
 import './Hero.css';
 
 export default function Hero({ city }) {
@@ -72,8 +72,13 @@ export default function Hero({ city }) {
             className="btn-primary hero-mobile-cta" 
             onClick={() => document.getElementById('quote-form')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            🟧 Get Free Quote
+            <FileText size={18} />
+            <span>Get Free Quote</span>
           </button>
+          
+          <p className="hero-mobile-trust">
+            🔒 Free quote • No hidden charges • Response in minutes
+          </p>
 
           <div className="hero-trust-list">
             <div className="trust-item"><CheckCircle2 size={20} color="#10B981" /> <span>Transparent Pricing</span></div>
