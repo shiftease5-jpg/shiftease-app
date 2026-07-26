@@ -23,34 +23,22 @@ export default function DriverLogin({ onLoginSuccess }) {
     e.preventDefault();
     setErrorMsg('');
     
-    try {
-      const endpoint = isSignup ? 'http://localhost:4000/driver/signup' : 'http://localhost:4000/driver/login';
-      const body = isSignup 
-        ? { name, phone, vehicle: `${vehicleType} (${vehicleNumber})`, password } 
-        : { phone, password };
-      
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
-      const data = await response.json();
-      
-      if (data.success) {
-        if (isSignup) {
-          setNewDriverData(data.driver);
-        } else {
-          // Show interactive success state before redirect
-          setIsLoggingIn(true);
-          setTimeout(() => {
-            onLoginSuccess(data.driver);
-          }, 1500);
-        }
-      } else {
-        setErrorMsg(data.message);
-      }
-    } catch (err) {
-      setErrorMsg('Failed to connect to server.');
+    // MOCK LOGIN FOR VERCEL PROTOTYPE
+    // Since we don't have a live backend database connected to Vercel, we will mock the login success.
+    const mockDriver = {
+      name: name || "Test Driver",
+      phone: phone,
+      vehicle: isSignup ? `${vehicleType} (${vehicleNumber})` : "Tata Ace (MH 12 AB 1234)",
+      trackingId: "TRK-" + Math.floor(100000 + Math.random() * 900000)
+    };
+
+    if (isSignup) {
+      setNewDriverData(mockDriver);
+    } else {
+      setIsLoggingIn(true);
+      setTimeout(() => {
+        onLoginSuccess(mockDriver);
+      }, 1500);
     }
   };
 
