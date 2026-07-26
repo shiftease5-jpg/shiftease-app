@@ -20,7 +20,7 @@
   --glass-border: rgba(0, 0, 0, 0.05);
   
   /* Layout */
-  --container-max-width: 1040px; /* Tighter container for readability */
+  --container-max-width: 1280px; /* Wider container for desktop */
   --border-radius: 16px;
   --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); /* Smooth, subtle transitions */
 }
