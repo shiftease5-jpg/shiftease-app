@@ -22,6 +22,7 @@ import Blog from './components/Blog';
 import Privacy from './components/Privacy';
 import Terms from './components/Terms';
 import CityLandingPage from './components/CityLandingPage';
+import BlogPost from './components/BlogPost';
 
 function LandingPage() {
   return (
@@ -58,6 +59,7 @@ function App() {
           <Route path="/simulator" element={<DriverSimulator />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>
