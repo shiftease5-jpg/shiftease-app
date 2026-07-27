@@ -47,15 +47,7 @@ const TIMELINE_STEPS = [
   'Delivered'
 ];
 
-function MapUpdater({ position }) {
-  const map = useMap();
-  useEffect(() => {
-    if (position) {
-      map.flyTo(position, 14, { animate: true, duration: 2 });
-    }
-  }, [position, map]);
-  return null;
-}
+
 
 // Component to handle recentering the map
 function RecenterButton({ position }) {
@@ -179,7 +171,6 @@ export default function TrackingMap() {
             <Popup>{isArrived ? 'Arrived!' : `Truck Speed: ${speed} km/h`}</Popup>
           </Marker>
 
-          <MapUpdater position={position} />
           <RecenterButton position={position} />
         </MapContainer>
         

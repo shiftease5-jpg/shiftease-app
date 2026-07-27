@@ -84,6 +84,7 @@ export default function DriverDashboard() {
   const [buttonState, setButtonState] = useState('idle'); // idle, confirm, loading, success
   
   const [position, setPosition] = useState([19.1136, 72.8697]); // Andheri West
+  const [mapCenter, setMapCenter] = useState([19.1136, 72.8697]); // Decoupled map center
   const [speed, setSpeed] = useState(0);
   const [activeTab, setActiveTab] = useState('current');
   const [history, setHistory] = useState([]);
@@ -132,6 +133,7 @@ export default function DriverDashboard() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((pos) => {
         setPosition([pos.coords.latitude, pos.coords.longitude]);
+        setMapCenter([pos.coords.latitude, pos.coords.longitude]);
       });
     }
 
@@ -283,7 +285,8 @@ export default function DriverDashboard() {
         time: Math.floor(Math.random() * 120 + 15) + " mins", // Dummy time
         customerPhone: "919967728718"
       });
-      setPosition(pickupCoords); // Jump map to pickup
+      setPosition(pickupCoords); 
+      setMapCenter(pickupCoords); // Jump map to pickup
       setSearchState('idle');
     } else {
       setSearchState('error');
@@ -326,7 +329,8 @@ export default function DriverDashboard() {
           time: Math.floor(Math.random() * 120 + 15) + " mins", 
           customerPhone: "919967728718"
         });
-        setPosition(pickupCoords); // Jump map to pickup
+        setPosition(pickupCoords); 
+        setMapCenter(pickupCoords); // Jump map to pickup
         setSearchState('idle');
       } else {
         setSearchState('error');
@@ -365,7 +369,10 @@ export default function DriverDashboard() {
     setSpeed(0);
     if (watchIdRef.current) navigator.geolocation.clearWatch(watchIdRef.current);
     if (socketRef.current) socketRef.current.emit('driverTripEnded', { trackingId: driver.trackingId });
-    if (jobDetails) setPosition(jobDetails.pickupCoords);
+    if (jobDetails) {
+      setPosition(jobDetails.pickupCoords);
+      setMapCenter(jobDetails.pickupCoords);
+    }
     
     // Save trip to backend
     try {
@@ -495,7 +502,7 @@ export default function DriverDashboard() {
           </div>
         </div>
 
-        <MapContainer center={position} zoom={13} zoomControl={false}>
+        <MapContainer center={mapCenter} zoom={13} zoomControl={false}>
           <TileLayer 
             url="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}" 
             attribution="&copy; Google Maps"
