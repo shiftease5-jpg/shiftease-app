@@ -164,15 +164,8 @@ export default function DriverDashboard() {
       'panvel': [18.9894, 73.1175]
     };
 
-    // Try finding a match in our local dictionary
-    for (const [key, coords] of Object.entries(mumbaiLocations)) {
-      if (q.includes(key)) {
-        return coords;
-      }
-    }
-
     try {
-      // 2. Try Nominatim API if not in local dictionary
+      // 1. Try exact address search on the internet first (Nominatim API)
       let coords = await fetchLocation(query);
       if (coords) return coords;
       
@@ -185,6 +178,13 @@ export default function DriverDashboard() {
       }
     } catch (e) {
       console.error("Geocoding error:", e);
+    }
+
+    // 2. FALLBACK: Try finding a neighborhood match in our local dictionary
+    for (const [key, coords] of Object.entries(mumbaiLocations)) {
+      if (q.includes(key)) {
+        return coords;
+      }
     }
     
     // SAFE FALLBACK: Hash to a guaranteed land coordinate to prevent crashing
