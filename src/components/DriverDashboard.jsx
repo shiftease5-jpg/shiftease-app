@@ -165,29 +165,23 @@ export default function DriverDashboard() {
     };
 
     try {
-      // 1. Try exact address search (Nominatim API)
-      let coords = await fetchLocation(query);
-      if (coords) return coords;
+      const isSpecific = query.toLowerCase().includes('mumbai') || query.toLowerCase().includes('thane') || query.toLowerCase().includes('pune');
       
-      coords = await fetchLocation(query + ", Mumbai, India");
-      if (coords) return coords;
+      let coords = null;
       
-      if (query.toLowerCase().includes('w')) {
-         coords = await fetchLocation(query.toLowerCase().replace(/w/g, 'v') + ", Mumbai, India");
-         if (coords) return coords;
+      if (!isSpecific) {
+        // Try appending Mumbai first
+        coords = await fetchLocation(query + ", Mumbai, Maharashtra");
+        // If not in Mumbai, try Thane
+        if (!coords) coords = await fetchLocation(query + ", Thane, Maharashtra");
       }
       
-      // 1.5 Smart Retry: If they typed "Flat 204, Oberoi Mall, Goregaon", OpenStreetMap fails because of "Flat 204".
-      // Let's strip the first part before the comma and try again ("Oberoi Mall, Goregaon")
-      if (query.includes(',')) {
-        const parts = query.split(',');
-        parts.shift(); // Remove the first part (usually the flat/house number)
-        const simplifiedQuery = parts.join(',').trim();
-        if (simplifiedQuery.length > 3) {
-           coords = await fetchLocation(simplifiedQuery + ", Mumbai, India");
-           if (coords) return coords;
-        }
+      // Fallback to exactly what they typed
+      if (!coords) {
+        coords = await fetchLocation(query);
       }
+      
+      if (coords) return coords;
       
     } catch (e) {
       console.error("Geocoding error:", e);
