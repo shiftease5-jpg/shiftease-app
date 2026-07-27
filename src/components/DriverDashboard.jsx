@@ -83,10 +83,31 @@ export default function DriverDashboard() {
     socketRef.current = io(API_URL);
     socketRef.current.on('connect', () => console.log('Driver connected to server'));
 
-    setHistory([
-      { _id: '1', date: 'Today', pickup: 'Dadar', dropoff: 'Powai', price: '₹5,400', status: 'Completed' },
-      { _id: '2', date: 'Yesterday', pickup: 'Thane', dropoff: 'Vashi', price: '₹3,200', status: 'Completed' }
-    ]);
+    const fetchHistory = async () => {
+      try {
+        const res = await fetch(`${API_URL}/driver/history/${driver._id || driver.phone}`);
+        const data = await res.json();
+        if (data.success) {
+          // Add 'date' field to match frontend grouping ('Today', 'Yesterday')
+          const processedTrips = data.trips.map(trip => {
+            const tripDate = new Date(trip.createdAt);
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            let dateLabel = tripDate.toLocaleDateString();
+            if (tripDate.toDateString() === today.toDateString()) dateLabel = 'Today';
+            else if (tripDate.toDateString() === yesterday.toDateString()) dateLabel = 'Yesterday';
+            
+            return { ...trip, date: dateLabel };
+          });
+          setHistory(processedTrips);
+        }
+      } catch (e) {
+        console.error("Failed to fetch history:", e);
+      }
+    };
+    fetchHistory();
 
     return () => {
       if (socketRef.current) socketRef.current.disconnect();
@@ -234,6 +255,37 @@ export default function DriverDashboard() {
     if (watchIdRef.current) navigator.geolocation.clearWatch(watchIdRef.current);
     if (socketRef.current) socketRef.current.emit('driverTripEnded', { trackingId: driver.trackingId });
     if (jobDetails) setPosition(jobDetails.pickupCoords);
+    
+    // Save trip to backend
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+      await fetch(`${API_URL}/trip/end`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          driverId: driver._id || driver.phone,
+          pickup: jobDetails?.pickup || "Unknown",
+          dropoff: jobDetails?.dropoff || "Unknown",
+          price: Math.floor(Math.random() * 5000 + 500) // Dummy price for demo
+        })
+      });
+      // Refresh history
+      const res = await fetch(`${API_URL}/driver/history/${driver._id || driver.phone}`);
+      const data = await res.json();
+      if (data.success) {
+        const processedTrips = data.trips.map(trip => {
+          const tripDate = new Date(trip.createdAt);
+          const today = new Date();
+          let dateLabel = tripDate.toLocaleDateString();
+          if (tripDate.toDateString() === today.toDateString()) dateLabel = 'Today';
+          return { ...trip, date: dateLabel };
+        });
+        setHistory(processedTrips);
+      }
+    } catch (e) {
+      console.error("Failed to save trip:", e);
+    }
+    
     setJobDetails(null); // Clear job details so form shows again
   };
 

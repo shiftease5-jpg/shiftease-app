@@ -22,23 +22,48 @@ export default function DriverLogin({ onLoginSuccess }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMsg('');
+    setIsLoggingIn(true);
     
-    // MOCK LOGIN FOR VERCEL PROTOTYPE
-    // Since we don't have a live backend database connected to Vercel, we will mock the login success.
-    const mockDriver = {
-      name: name || "Test Driver",
-      phone: phone,
-      vehicle: isSignup ? `${vehicleType} (${vehicleNumber})` : "Tata Ace (MH 12 AB 1234)",
-      trackingId: "TRK-" + Math.floor(100000 + Math.random() * 900000)
-    };
-
-    if (isSignup) {
-      setNewDriverData(mockDriver);
-    } else {
-      setIsLoggingIn(true);
-      setTimeout(() => {
-        onLoginSuccess(mockDriver);
-      }, 1500);
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+      
+      if (isSignup) {
+        const res = await fetch(`${API_URL}/driver/signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            phone,
+            vehicle: `${vehicleType} (${vehicleNumber})`,
+            password
+          })
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+          setNewDriverData({ ...data.driver, password });
+        } else {
+          setErrorMsg(data.message || 'Signup failed');
+        }
+      } else {
+        const res = await fetch(`${API_URL}/driver/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone, password })
+        });
+        const data = await res.json();
+        
+        if (data.success) {
+          onLoginSuccess(data.driver);
+        } else {
+          setErrorMsg(data.message || 'Invalid credentials');
+        }
+      }
+    } catch (err) {
+      console.error(err);
+      setErrorMsg('Failed to connect to server. Ensure backend is running.');
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
