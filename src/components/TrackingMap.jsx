@@ -206,18 +206,20 @@ export default function TrackingMap() {
 
           {/* Driver Rich Card */}
           <div className="driver-info-card">
-            <div className="driver-profile">
-              <div className="driver-avatar-group">
-                <div className="driver-avatar">👨</div>
-                <div className="driver-details">
-                  <h4>{driverDetails ? driverDetails.name : 'Loading...'}</h4>
-                  <p>
+            <div className="driver-profile" style={{ display: 'flex', alignItems: 'flex-start' }}>
+              <div className="driver-avatar-group" style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+                <div className="driver-avatar" style={{ width: '64px', height: '64px', fontSize: '2rem' }}>👨</div>
+                <div className="driver-details" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <h4 style={{ fontSize: '1.3rem', margin: 0, whiteSpace: 'nowrap' }}>{driverDetails ? driverDetails.name : 'Loading...'}</h4>
+                  <p style={{ margin: 0, whiteSpace: 'nowrap' }}>
                     <span className="driver-rating">★ {driverDetails ? driverDetails.rating.split(' ')[0] : '5.0'}</span> 
                     &nbsp;• Verified Driver
                   </p>
+                  <div className="vehicle-plate" style={{ display: 'inline-block', width: 'fit-content', marginTop: '4px', fontSize: '0.85rem' }}>
+                    {driverDetails ? driverDetails.vehicle : '...'}
+                  </div>
                 </div>
               </div>
-              <div className="vehicle-plate">{driverDetails ? driverDetails.vehicle : '...'}</div>
             </div>
             <div className="driver-stats-row" style={{ justifyContent: 'center', gap: '32px' }}>
               <div className="driver-stat">
