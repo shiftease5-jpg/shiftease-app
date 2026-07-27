@@ -36,7 +36,7 @@ export default function Services() {
           {services.map((service, idx) => (
             <div className="service-item fade-in-up" style={{animationDelay: `${idx * 0.1}s`}} key={idx}>
               <div className="service-image-wrapper">
-                <img src={service.image} alt={service.title} className="service-image" />
+                <img src={service.image} alt={service.title} loading="lazy" className="service-image" />
               </div>
               <div className="service-content">
                 <h3>{service.title}</h3>

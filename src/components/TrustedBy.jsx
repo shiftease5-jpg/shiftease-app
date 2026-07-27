@@ -16,7 +16,7 @@ export default function TrustedBy() {
         <div className="trusted-logos">
           {partners.map((partner, idx) => (
             <div key={idx} className="trusted-logo-wrapper">
-              <img src={partner.logo} alt={partner.name} className="trusted-logo" />
+              <img src={partner.logo} alt={`${partner.name} logo`} loading="lazy" className="trusted-logo" />
             </div>
           ))}
         </div>

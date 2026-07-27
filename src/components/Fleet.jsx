@@ -37,7 +37,7 @@ export default function Fleet() {
           {fleet.map((vehicle, idx) => (
             <div className="fleet-card glass" key={idx}>
               <div className="fleet-image-container">
-                <img src={vehicle.image} alt={vehicle.name} className="fleet-image" />
+                <img src={vehicle.image} alt={vehicle.name} loading="lazy" className="fleet-image" />
               </div>
               <div className="fleet-content">
                 <h3>{vehicle.name}</h3>
