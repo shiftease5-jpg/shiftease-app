@@ -75,8 +75,8 @@ export default function TrackingMap() {
   const [customer, setCustomer] = useState(null);
   
   // Coordinates
-  const pickupCoords = [19.1136, 72.8697];
-  const dropoffCoords = [19.0596, 72.8600];
+  const [pickupCoords, setPickupCoords] = useState([19.1136, 72.8697]); // Andheri default
+  const [dropoffCoords, setDropoffCoords] = useState([19.0596, 72.8600]); // Bandra default
   
   const [position, setPosition] = useState(pickupCoords);
   const [speed, setSpeed] = useState(0);
