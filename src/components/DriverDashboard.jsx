@@ -67,6 +67,9 @@ function MapClickHandler({ onMapClick }) {
   useMapEvents({
     click(e) {
       onMapClick(e.latlng);
+    },
+    contextmenu(e) {
+      onMapClick(e.latlng);
     }
   });
   return null;
@@ -300,8 +303,13 @@ export default function DriverDashboard() {
       
       let addressName = "Custom Map Location";
       if (data && data.display_name) {
-        // Nominatim returns a very long string, we just want the first 2 parts (e.g. "Deloitte, Powai")
-        addressName = data.display_name.split(',').slice(0, 2).join(',').trim();
+        // Nominatim returns a very long string, we just want the first 1-2 parts to keep it short for mobile
+        const parts = data.display_name.split(',');
+        addressName = parts.slice(0, 2).join(',').trim();
+        // If it's still insanely long, truncate it
+        if (addressName.length > 40) {
+          addressName = addressName.substring(0, 37) + '...';
+        }
       }
       
       // 2. Fetch driver's exact fresh high-accuracy GPS coordinates!
@@ -573,7 +581,7 @@ export default function DriverDashboard() {
                         </div>
                         <div>
                           <p style={{ margin: 0, fontSize: '0.8rem', color: '#94a3b8' }}>Destination</p>
-                          <h4 style={{ margin: 0, fontSize: '1rem', color: 'white' }}>{jobDetails.dropoff}</h4>
+                          <h4 style={{ margin: 0, fontSize: '1rem', color: 'white', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{jobDetails.dropoff}</h4>
                         </div>
                       </div>
                     </div>
