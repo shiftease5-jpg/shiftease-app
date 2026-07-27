@@ -214,7 +214,7 @@ export default function TrackingMap() {
               </div>
               <div className="vehicle-plate">{driverDetails ? driverDetails.vehicle : '...'}</div>
             </div>
-            <div className="driver-stats-row">
+            <div className="driver-stats-row" style={{ justifyContent: 'center', gap: '32px' }}>
               <div className="driver-stat">
                 <p>Experience</p>
                 <h5>3+ Years</h5>
@@ -222,10 +222,6 @@ export default function TrackingMap() {
               <div className="driver-stat">
                 <p>Phone</p>
                 <h5>+91 {customer.trackingId.slice(0, 5)}...</h5>
-              </div>
-              <div className="driver-stat">
-                <p>Verified</p>
-                <h5 style={{color: '#10b981'}}>Yes ✓</h5>
               </div>
             </div>
           </div>
