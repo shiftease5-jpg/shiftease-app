@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import { io } from 'socket.io-client';
 import { Phone, MessageCircle, Map as MapIcon, Star, Clock, Briefcase, IndianRupee, LocateFixed } from 'lucide-react';
@@ -60,6 +60,16 @@ function MapControls({ position }) {
       </div>
     </div>
   );
+}
+
+// Component to handle map clicks
+function MapClickHandler({ onMapClick }) {
+  useMapEvents({
+    click(e) {
+      onMapClick(e.latlng);
+    }
+  });
+  return null;
 }
 
 export default function DriverDashboard() {
@@ -277,6 +287,48 @@ export default function DriverDashboard() {
     }
   };
 
+  const handleMapClick = async (latlng) => {
+    // If a job is already active, don't allow map clicks to override it
+    if (jobDetails) return;
+    
+    setSearchState('loading');
+    
+    try {
+      // 1. Reverse Geocode to get the name of the place they tapped!
+      const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latlng.lat}&lon=${latlng.lng}`);
+      const data = await res.json();
+      
+      let addressName = "Custom Map Location";
+      if (data && data.display_name) {
+        // Nominatim returns a very long string, we just want the first 2 parts (e.g. "Deloitte, Powai")
+        addressName = data.display_name.split(',').slice(0, 2).join(',').trim();
+      }
+      
+      // 2. Fetch driver's exact fresh high-accuracy GPS coordinates!
+      const pickupCoords = await getAccurateCurrentPosition(); 
+      const dropoffCoords = [latlng.lat, latlng.lng];
+      
+      if (pickupCoords && dropoffCoords) {
+        setJobDetails({
+          pickup: "Current Location",
+          pickupCoords,
+          dropoff: addressName,
+          dropoffCoords,
+          distance: Math.floor(Math.random() * 50 + 5) + " km", 
+          time: Math.floor(Math.random() * 120 + 15) + " mins", 
+          customerPhone: "919967728718"
+        });
+        setPosition(pickupCoords); // Jump map to pickup
+        setSearchState('idle');
+      } else {
+        setSearchState('error');
+      }
+    } catch (e) {
+      console.error("Map click error:", e);
+      setSearchState('error');
+    }
+  };
+
   const handleStartTrip = () => {
     if (status === 'offline') {
       setStatus('online');
@@ -458,6 +510,7 @@ export default function DriverDashboard() {
           )}
 
           <MapControls position={position} />
+          <MapClickHandler onMapClick={handleMapClick} />
         </MapContainer>
       </div>
 
@@ -488,7 +541,7 @@ export default function DriverDashboard() {
             {!jobDetails ? (
               <div className="driver-job-card">
                 <h4 style={{ margin: '0 0 16px 0', color: 'white' }}>Find New Job</h4>
-                <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '16px' }}>Enter a pickup and drop-off location (e.g. "Mumbai" or "Pune") to generate a new tracking route.</p>
+                <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '16px' }}>Enter a destination OR <strong>tap anywhere directly on the map</strong> to drop a pin.</p>
                 <form onSubmit={handleSearchJob} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   <div style={{ padding: '12px', borderRadius: '8px', border: '1px solid #334155', background: '#1e293b', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '12px' }}>
                     <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#3b82f6', boxShadow: '0 0 8px #3b82f6' }} />
