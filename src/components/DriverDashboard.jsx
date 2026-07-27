@@ -268,7 +268,7 @@ export default function DriverDashboard() {
         dropoffCoords,
         distance: Math.floor(Math.random() * 50 + 5) + " km", // Dummy distance
         time: Math.floor(Math.random() * 120 + 15) + " mins", // Dummy time
-        customerPhone: "919876543211"
+        customerPhone: "919967728718"
       });
       setPosition(pickupCoords); // Jump map to pickup
       setSearchState('idle');
