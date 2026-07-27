@@ -232,10 +232,10 @@ export default function TrackingMap() {
 
           {/* Action Buttons Grid */}
           <div className="driver-actions">
-            <button className="action-btn primary" onClick={() => window.location.href = `tel:+91${customer.trackingId}`}>
+            <button className="action-btn primary" onClick={() => driverDetails?.phone ? window.location.href = `tel:+91${driverDetails.phone}` : alert("Loading driver details...")}>
               <Phone size={16} /> Call Driver
             </button>
-            <button className="action-btn success" onClick={() => window.open(`https://wa.me/91${customer.trackingId}`, '_blank')}>
+            <button className="action-btn success" onClick={() => driverDetails?.phone ? window.open(`https://wa.me/91${driverDetails.phone}`, '_blank') : alert("Loading driver details...")}>
               <MessageCircle size={16} /> WhatsApp
             </button>
             <button className="action-btn warning" onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${position[0]},${position[1]}`, '_blank')}>
