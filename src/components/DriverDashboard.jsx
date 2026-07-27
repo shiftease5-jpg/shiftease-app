@@ -165,7 +165,7 @@ export default function DriverDashboard() {
     };
 
     try {
-      // 1. Try exact address search on the internet first (Nominatim API)
+      // 1. Try exact address search (Nominatim API)
       let coords = await fetchLocation(query);
       if (coords) return coords;
       
@@ -176,6 +176,19 @@ export default function DriverDashboard() {
          coords = await fetchLocation(query.toLowerCase().replace(/w/g, 'v') + ", Mumbai, India");
          if (coords) return coords;
       }
+      
+      // 1.5 Smart Retry: If they typed "Flat 204, Oberoi Mall, Goregaon", OpenStreetMap fails because of "Flat 204".
+      // Let's strip the first part before the comma and try again ("Oberoi Mall, Goregaon")
+      if (query.includes(',')) {
+        const parts = query.split(',');
+        parts.shift(); // Remove the first part (usually the flat/house number)
+        const simplifiedQuery = parts.join(',').trim();
+        if (simplifiedQuery.length > 3) {
+           coords = await fetchLocation(simplifiedQuery + ", Mumbai, India");
+           if (coords) return coords;
+        }
+      }
+      
     } catch (e) {
       console.error("Geocoding error:", e);
     }
