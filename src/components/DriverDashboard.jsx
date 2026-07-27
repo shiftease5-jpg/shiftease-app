@@ -145,7 +145,8 @@ export default function DriverDashboard() {
       'bandra': [19.0596, 72.8600],
       'bkc': [19.0664, 72.8659],
       'borivali': [19.2288, 72.8541],
-      'goregaon': [19.1645, 72.8449],
+      'goregaon': [19.1643, 72.8494], // Centered at Goregaon Station
+      'goregoan': [19.1643, 72.8494], // Common typo
       'malad': [19.1834, 72.8397],
       'juhu': [19.1026, 72.8258],
       'ghatkopar': [19.0790, 72.9080],
