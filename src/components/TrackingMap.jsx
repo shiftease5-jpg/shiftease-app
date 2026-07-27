@@ -209,7 +209,10 @@ export default function TrackingMap() {
                 <div className="driver-avatar">👨</div>
                 <div className="driver-details">
                   <h4>{driverDetails ? driverDetails.name : 'Loading...'}</h4>
-                  <p><span className="driver-rating">★★★★★</span> {driverDetails ? driverDetails.rating : '5.0'} (Verified Driver)</p>
+                  <p>
+                    <span className="driver-rating">★ {driverDetails ? driverDetails.rating.split(' ')[0] : '5.0'}</span> 
+                    &nbsp;• Verified Driver
+                  </p>
                 </div>
               </div>
               <div className="vehicle-plate">{driverDetails ? driverDetails.vehicle : '...'}</div>
