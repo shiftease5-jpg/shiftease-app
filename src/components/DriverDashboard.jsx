@@ -95,7 +95,7 @@ export default function DriverDashboard() {
   // Heartbeat to sync with customer even when stationary
   useEffect(() => {
     let interval;
-    if (status === 'ontrip' && driver) {
+    if ((status === 'online' || status === 'ontrip') && driver) {
       interval = setInterval(() => {
         if (socketRef.current && latestJob.current) {
           socketRef.current.emit('driverLocationUpdate', {
