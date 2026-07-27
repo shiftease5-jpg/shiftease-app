@@ -81,6 +81,37 @@ export default function DriverDashboard() {
   const [jobDetails, setJobDetails] = useState(null);
   const [searchState, setSearchState] = useState('idle'); // idle, loading, error
 
+  // Refs for background interval syncing
+  const latestPosition = useRef(position);
+  const latestSpeed = useRef(speed);
+  const latestJob = useRef(jobDetails);
+
+  useEffect(() => {
+    latestPosition.current = position;
+    latestSpeed.current = speed;
+    latestJob.current = jobDetails;
+  }, [position, speed, jobDetails]);
+
+  // Heartbeat to sync with customer even when stationary
+  useEffect(() => {
+    let interval;
+    if (status === 'ontrip' && driver) {
+      interval = setInterval(() => {
+        if (socketRef.current && latestJob.current) {
+          socketRef.current.emit('driverLocationUpdate', {
+            trackingId: driver.trackingId,
+            lat: latestPosition.current[0],
+            lng: latestPosition.current[1],
+            speed: latestSpeed.current,
+            pickupCoords: latestJob.current.pickupCoords,
+            dropoffCoords: latestJob.current.dropoffCoords
+          });
+        }
+      }, 3000);
+    }
+    return () => clearInterval(interval);
+  }, [status, driver]);
+
   useEffect(() => {
     if (!driver) return;
     
