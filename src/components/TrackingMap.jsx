@@ -232,7 +232,7 @@ export default function TrackingMap() {
           </div>
 
           {/* Action Buttons Grid */}
-          <div className="driver-actions">
+          <div className="action-grid">
             <button className="action-btn primary" onClick={() => driverDetails?.phone ? window.location.href = `tel:+91${driverDetails.phone}` : alert("Loading driver details...")}>
               <Phone size={16} /> Call Driver
             </button>
