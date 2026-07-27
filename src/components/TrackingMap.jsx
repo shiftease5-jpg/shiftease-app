@@ -141,23 +141,6 @@ export default function TrackingMap() {
       </button>
 
       <div className="tracking-map-wrapper">
-        {/* ETA Glass Overlay */}
-        <div className="tracking-eta-overlay">
-          <div className="live-badge">
-            <div className="live-dot"></div> LIVE
-          </div>
-          <div className="eta-details">
-            <div className="eta-block">
-              <p>ETA</p>
-              <h3 style={{color: '#10b981'}}>18 mins</h3>
-            </div>
-            <div className="eta-block" style={{textAlign: 'right'}}>
-              <p>Distance</p>
-              <h3>7.4 km</h3>
-            </div>
-          </div>
-          <p className="eta-last-update">Last Updated: {lastUpdatedTime} sec ago</p>
-        </div>
 
         <MapContainer center={pickupCoords} zoom={13} zoomControl={false}>
           <TileLayer 
@@ -186,6 +169,24 @@ export default function TrackingMap() {
         {/* Scrollable Bottom Sheet */}
         <div className="tracking-bottom-sheet">
           
+          {/* ETA Block (Moved from overlay) */}
+          <div className="tracking-eta-overlay">
+            <div className="live-badge">
+              <div className="live-dot"></div> LIVE
+            </div>
+            <div className="eta-details">
+              <div className="eta-block">
+                <p>ETA</p>
+                <h3 style={{color: '#10b981'}}>18 mins</h3>
+              </div>
+              <div className="eta-block" style={{textAlign: 'right'}}>
+                <p>Distance</p>
+                <h3>7.4 km</h3>
+              </div>
+            </div>
+            <p className="eta-last-update">Last Updated: {lastUpdatedTime} sec ago</p>
+          </div>
+
           {/* Driver Rich Card */}
           <div className="driver-info-card">
             <div className="driver-profile">
@@ -216,10 +217,10 @@ export default function TrackingMap() {
 
           {/* Action Buttons Grid */}
           <div className="driver-actions">
-            <button className="action-btn primary" onClick={() => window.location.href = 'tel:+919797820423'}>
+            <button className="action-btn primary" onClick={() => window.location.href = `tel:+91${customer.trackingId}`}>
               <Phone size={16} /> Call Driver
             </button>
-            <button className="action-btn success" onClick={() => window.open('https://wa.me/919797820423', '_blank')}>
+            <button className="action-btn success" onClick={() => window.open(`https://wa.me/91${customer.trackingId}`, '_blank')}>
               <MessageCircle size={16} /> WhatsApp
             </button>
             <button className="action-btn warning" onClick={() => window.open(`https://www.google.com/maps/dir/?api=1&destination=${position[0]},${position[1]}`, '_blank')}>
@@ -273,28 +274,6 @@ export default function TrackingMap() {
             </div>
           </div>
 
-          {/* Moving Details */}
-          <div className="summary-section">
-            <h4>Moving Details</h4>
-            <div className="data-grid">
-              <div className="data-item">
-                <p>Move Type</p>
-                <h5>2 BHK Premium</h5>
-              </div>
-              <div className="data-item">
-                <p>Items</p>
-                <h5>46 Total</h5>
-              </div>
-              <div className="data-item">
-                <p>Packing Status</p>
-                <h5>Completed</h5>
-              </div>
-              <div className="data-item">
-                <p>Expected Delivery</p>
-                <h5>{new Date(Date.now() + 18 * 60000).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}</h5>
-              </div>
-            </div>
-          </div>
 
           {/* Recent Updates */}
           <div className="summary-section">

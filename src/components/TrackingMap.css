@@ -51,18 +51,15 @@
   transition: transform 3s linear;
 }
 
-/* ETA Overlay */
+/* ETA Overlay (Now inside bottom sheet) */
 .tracking-eta-overlay {
-  position: absolute;
-  top: 80px;
-  left: 20px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 16px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-  z-index: 1000;
-  border: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  z-index: 1;
+  border: none;
   min-width: 200px;
 }
 
