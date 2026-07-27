@@ -66,7 +66,7 @@ function RecenterButton({ position }) {
       className="recenter-btn"
       title="Live Truck Location"
     >
-      <LocateFixed size={24} />
+      <LocateFixed size={20} color="#1a73e8" />
     </button>
   );
 }
