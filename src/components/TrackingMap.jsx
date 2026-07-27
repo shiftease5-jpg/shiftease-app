@@ -226,7 +226,7 @@ export default function TrackingMap() {
               </div>
               <div className="driver-stat">
                 <p>Phone</p>
-                <h5>+91 {driverDetails?.phone ? driverDetails.phone.slice(0, 5) : '...'}...</h5>
+                <h5>+91 {driverDetails?.phone || 'Loading...'}</h5>
               </div>
             </div>
           </div>

@@ -287,9 +287,6 @@
   color: #334155;
   border: 1px solid #cbd5e1;
   white-space: nowrap;
-  max-width: 130px;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .driver-stats-row {
