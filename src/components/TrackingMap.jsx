@@ -160,7 +160,10 @@ export default function TrackingMap() {
         </div>
 
         <MapContainer center={pickupCoords} zoom={13} zoomControl={false}>
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <TileLayer 
+            url="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}" 
+            attribution="&copy; Google Maps"
+          />
           
           <Polyline positions={[pickupCoords, dropoffCoords]} color="#3b82f6" weight={4} dashArray="10, 10" />
           

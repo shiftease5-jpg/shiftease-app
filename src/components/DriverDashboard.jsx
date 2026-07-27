@@ -395,7 +395,10 @@ export default function DriverDashboard() {
         </div>
 
         <MapContainer center={position} zoom={13} zoomControl={false}>
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          <TileLayer 
+            url="https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}" 
+            attribution="&copy; Google Maps"
+          />
           
           <Marker position={position} icon={truckIcon}>
             <Popup>You are here ({speed} km/h)</Popup>
