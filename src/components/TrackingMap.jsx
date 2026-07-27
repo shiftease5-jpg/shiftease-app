@@ -83,6 +83,7 @@ export default function TrackingMap() {
   const [isArrived, setIsArrived] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState(2); // "Driver On The Way"
   const [lastUpdatedTime, setLastUpdatedTime] = useState(0); // seconds ago
+  const [driverDetails, setDriverDetails] = useState(null);
   
   const socketRef = useRef(null);
   const navigate = useNavigate();
@@ -94,6 +95,20 @@ export default function TrackingMap() {
     // Connect to backend server
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
     socketRef.current = io(API_URL);
+
+    // Fetch driver public details
+    const fetchDriverDetails = async () => {
+      try {
+        const res = await fetch(`${API_URL}/driver/details/${customer.trackingId}`);
+        const data = await res.json();
+        if (data.success) {
+          setDriverDetails(data.driver);
+        }
+      } catch (e) {
+        console.error("Failed to fetch driver info:", e);
+      }
+    };
+    fetchDriverDetails();
 
     socketRef.current.on('connect', () => {
       console.log('Connected to tracking server');
@@ -193,23 +208,23 @@ export default function TrackingMap() {
               <div className="driver-avatar-group">
                 <div className="driver-avatar">👨</div>
                 <div className="driver-details">
-                  <h4>Ramesh Kumar</h4>
-                  <p><span className="driver-rating">★★★★☆</span> 4.9 (120 Deliveries)</p>
+                  <h4>{driverDetails ? driverDetails.name : 'Loading...'}</h4>
+                  <p><span className="driver-rating">★★★★★</span> {driverDetails ? driverDetails.rating : '5.0'} (Verified Driver)</p>
                 </div>
               </div>
-              <div className="vehicle-plate">MH12AB1234</div>
+              <div className="vehicle-plate">{driverDetails ? driverDetails.vehicle : '...'}</div>
             </div>
             <div className="driver-stats-row">
               <div className="driver-stat">
                 <p>Experience</p>
-                <h5>4 Years</h5>
+                <h5>3+ Years</h5>
               </div>
               <div className="driver-stat">
-                <p>Languages</p>
-                <h5>Hindi, Marathi</h5>
+                <p>Phone</p>
+                <h5>+91 {customer.trackingId.slice(0, 5)}...</h5>
               </div>
               <div className="driver-stat">
-                <p>Vaccinated</p>
+                <p>Verified</p>
                 <h5 style={{color: '#10b981'}}>Yes ✓</h5>
               </div>
             </div>

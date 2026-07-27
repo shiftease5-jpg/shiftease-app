@@ -161,6 +161,7 @@ app.post('/trip/end', async (req, res) => {
 });
 
 // Get Driver History Route
+// Get Driver History Route
 app.get('/driver/history/:driverId', async (req, res) => {
   const { driverId } = req.params;
   
@@ -170,6 +171,27 @@ app.get('/driver/history/:driverId', async (req, res) => {
   } else {
     const trips = tripsDB.filter(t => t.driverId === driverId).sort((a, b) => b.createdAt - a.createdAt);
     res.json({ success: true, trips });
+  }
+});
+
+// Get Public Driver Details by Tracking ID
+app.get('/driver/details/:trackingId', async (req, res) => {
+  const { trackingId } = req.params;
+  
+  if (useMongo) {
+    const driver = await Driver.findOne({ trackingId });
+    if (driver) {
+      res.json({ success: true, driver: { name: driver.name, phone: driver.phone, vehicle: driver.vehicle, rating: driver.rating || "5.0" } });
+    } else {
+      res.json({ success: false, message: 'Driver not found' });
+    }
+  } else {
+    const driver = driversDB.find(d => d.trackingId === trackingId);
+    if (driver) {
+      res.json({ success: true, driver: { name: driver.name, phone: driver.phone, vehicle: driver.vehicle, rating: driver.rating || "5.0" } });
+    } else {
+      res.json({ success: false, message: 'Driver not found' });
+    }
   }
 });
 
