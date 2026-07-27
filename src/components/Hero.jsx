@@ -14,13 +14,25 @@ export default function Hero({ city, serviceName }) {
         <div className="hero-content">
           <p className="hero-eyebrow fade-in-up">India's modern moving platform.</p>
           <h1 className="hero-title fade-in-up" style={{animationDelay: '0.1s'}}>
-            Move<br />
-            Without<br />
-            <span className="text-gradient">Stress.</span>
+            {serviceName ? (
+              <>
+                {serviceName}<br />
+                <span className="text-gradient">Experts.</span>
+              </>
+            ) : (
+              <>
+                Move<br />
+                Without<br />
+                <span className="text-gradient">Stress.</span>
+              </>
+            )}
           </h1>
           
           <p className="hero-subtitle fade-in-up" style={{animationDelay: '0.2s'}}>
-            Professional packers and movers in {city || 'Mumbai'} with live GPS tracking, transparent pricing, and verified professionals.
+            {serviceName 
+              ? `Top-rated ${serviceName.toLowerCase()} in ${city || 'Mumbai'} with live GPS tracking, transparent pricing, and verified professionals.`
+              : `Professional packers and movers in ${city || 'Mumbai'} with live GPS tracking, transparent pricing, and verified professionals.`
+            }
           </p>
           
           <div className="hero-cta fade-in-up" style={{animationDelay: '0.3s'}}>
