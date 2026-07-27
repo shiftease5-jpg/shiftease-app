@@ -37,7 +37,7 @@ export default function Hero({ city, serviceName }) {
           
           <div className="hero-cta fade-in-up" style={{animationDelay: '0.3s'}}>
             <button className="btn-primary" onClick={scrollToQuote}>
-              Get Free Quote
+              Get Instant Estimate
             </button>
             <Link to="/track" className="btn-secondary">
               Live Tracking

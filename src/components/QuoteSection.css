@@ -20,6 +20,8 @@
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow-md);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .glass-form:hover {
@@ -27,6 +29,87 @@
   box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -5px rgba(0, 0, 0, 0.05);
 }
 
+/* Wizard Progress */
+.wizard-progress {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.wizard-progress::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  right: 20px;
+  height: 3px;
+  background: #e2e8f0;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.progress-line {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  height: 3px;
+  background: var(--secondary-color);
+  transform: translateY(-50%);
+  z-index: 2;
+  transition: width 0.4s ease;
+}
+
+.progress-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.9rem;
+  z-index: 3;
+  transition: all 0.3s ease;
+}
+
+.progress-dot.active {
+  background: var(--secondary-color);
+  color: white;
+}
+
+.progress-dot.current {
+  box-shadow: 0 0 0 4px rgba(255, 90, 0, 0.2);
+}
+
+/* Animations */
+.wizard-step {
+  animation: slideInRight 0.4s ease forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.step-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Inputs */
 .form-group {
   margin-bottom: 20px;
 }
@@ -43,50 +126,156 @@
   color: var(--text-light);
 }
 
-.input-wrapper input,
-.form-group select {
+.input-wrapper input {
   width: 100%;
   padding: 16px;
-  padding-left: 48px !important; /* Force padding left for icons */
-  border: 1px solid #E5E7EB;
+  padding-left: 48px !important;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
   transition: var(--transition);
   outline: none;
   background: var(--surface-color);
+  color: var(--text-color);
 }
 
-.form-group select {
-  padding-left: 16px !important; /* Select doesn't have a left icon */
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  cursor: pointer;
-}
-
-.input-wrapper input:focus,
-.form-group select:focus {
+.input-wrapper input:focus {
   border-color: var(--secondary-color);
   box-shadow: 0 0 0 4px rgba(255, 90, 0, 0.1);
 }
 
-.form-row {
+/* Inventory Grid */
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.inventory-grid .inventory-card:last-child {
+  grid-column: span 2;
+}
+
+.inventory-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  background: var(--surface-color);
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.inventory-card:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.inventory-card.active {
+  border-color: var(--secondary-color);
+  background: rgba(255, 90, 0, 0.05);
+}
+
+.inventory-icon {
+  color: var(--primary-color);
+}
+
+.inventory-card.active .inventory-icon {
+  color: var(--secondary-color);
+}
+
+.inventory-card span {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.check-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: var(--secondary-color);
+}
+
+/* Actions */
+.wizard-actions {
   display: flex;
   gap: 16px;
 }
 
-.half {
-  flex: 1;
-}
-
-.submit-btn {
+.wizard-btn {
   width: 100%;
-  margin-top: 12px;
   padding: 16px;
   font-size: 1.125rem;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.wizard-btn.outline {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: var(--text-color);
+}
+
+.wizard-btn.outline:hover {
+  background: #f1f5f9;
+}
+
+/* Estimate Step */
+.estimate-step {
+  text-align: center;
+}
+
+.estimate-success-icon {
+  color: #10b981;
+  margin-bottom: 16px;
+  display: inline-flex;
+}
+
+.estimate-subtitle {
+  color: var(--text-light);
+  margin-bottom: 24px;
+}
+
+.estimate-price-box {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+  color: #10b981;
+}
+
+.estimate-currency {
+  font-size: 1.5rem;
+  vertical-align: top;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+.estimate-amount {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.estimate-note {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 32px;
+}
+
+.submit-btn {
   animation: pulse-orange 2.5s infinite;
 }
 
@@ -103,11 +292,16 @@
 }
 
 @media (max-width: 768px) {
-  .form-row {
-    flex-direction: column;
-    gap: 0;
-  }
   .glass-form {
     padding: 24px;
+  }
+  .inventory-grid {
+    grid-template-columns: 1fr;
+  }
+  .inventory-grid .inventory-card:last-child {
+    grid-column: span 1;
+  }
+  .wizard-actions {
+    flex-direction: column-reverse;
   }
 }
