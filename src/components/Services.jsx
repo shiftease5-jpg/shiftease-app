@@ -41,7 +41,7 @@ export default function Services() {
               <div className="service-content">
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
-                <Link to={`/service/${service.id}`} className="service-link">
+                <Link to={`/service/${service.id}`} className="service-link" onClick={() => window.scrollTo({ top: 0, behavior: 'instant' })}>
                   Learn more <ArrowRight size={16} />
                 </Link>
               </div>
