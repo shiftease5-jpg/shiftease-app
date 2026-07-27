@@ -38,12 +38,12 @@ export default function QuoteSection({ city }) {
       });
       
       const text = `Hi, I want a quote for moving.\n\nRoute: ${formData.from} to ${formData.to}\nSize: ${formData.size}\nDate: ${formData.date}\nPhone: ${formData.phone}\n\nPlease share the best price!`;
-      window.open(`https://wa.me/919967728718?text=${encodeURIComponent(text)}`, '_blank');
+      window.open(`https://wa.me/919797820423?text=${encodeURIComponent(text)}`, '_blank');
       
     } catch (error) {
       console.error("Failed to save quote:", error);
       const text = `Hi, I want a quote for moving.\n\nRoute: ${formData.from} to ${formData.to}\nSize: ${formData.size}\nDate: ${formData.date}\nPhone: ${formData.phone}\n\nPlease share the best price!`;
-      window.open(`https://wa.me/919967728718?text=${encodeURIComponent(text)}`, '_blank');
+      window.open(`https://wa.me/919797820423?text=${encodeURIComponent(text)}`, '_blank');
     } finally {
       setLoading(false);
     }
