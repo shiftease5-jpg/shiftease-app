@@ -36,17 +36,29 @@ const dropoffIcon = new L.Icon({
   iconAnchor: [12, 41]
 });
 
-// Component to handle recentering the map
-function RecenterButton({ position }) {
+// Component to handle map controls
+function MapControls({ position }) {
   const map = useMap();
   return (
-    <button 
-      onClick={() => map.flyTo(position, 15, { animate: true })} 
-      className="recenter-btn"
-      title="My Location"
-    >
-      <LocateFixed size={24} />
-    </button>
+    <div className="google-map-controls">
+      <button 
+        onClick={() => map.flyTo(position, 15, { animate: true })} 
+        className="map-control-btn locate-btn"
+        title="My Location"
+      >
+        <LocateFixed size={20} color="#1a73e8" />
+      </button>
+      
+      <div className="zoom-controls">
+        <button onClick={() => map.zoomIn()} className="map-control-btn zoom-in" title="Zoom In">
+          +
+        </button>
+        <div className="zoom-divider"></div>
+        <button onClick={() => map.zoomOut()} className="map-control-btn zoom-out" title="Zoom Out">
+          −
+        </button>
+      </div>
+    </div>
   );
 }
 
@@ -401,7 +413,7 @@ export default function DriverDashboard() {
             </>
           )}
 
-          <RecenterButton position={position} />
+          <MapControls position={position} />
         </MapContainer>
       </div>
 
