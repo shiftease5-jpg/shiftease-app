@@ -98,6 +98,10 @@ button {
   font-weight: 400;
 }
 
+.bg-light {
+  background-color: var(--surface-color);
+}
+
 /* Primary Button */
 .btn-primary {
   background-color: var(--secondary-color);
