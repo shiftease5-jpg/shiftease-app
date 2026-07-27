@@ -118,6 +118,8 @@ export default function TrackingMap() {
     socketRef.current.on('customerLocationUpdate', (data) => {
       setPosition([data.lat, data.lng]);
       setSpeed(data.speed);
+      if (data.pickupCoords) setPickupCoords(data.pickupCoords);
+      if (data.dropoffCoords) setDropoffCoords(data.dropoffCoords);
       setCurrentStepIndex(4); // Transit
       setIsArrived(false);
       setLastUpdatedTime(0); // Reset timer on update
@@ -224,7 +226,7 @@ export default function TrackingMap() {
               </div>
               <div className="driver-stat">
                 <p>Phone</p>
-                <h5>+91 {customer.trackingId.slice(0, 5)}...</h5>
+                <h5>+91 {driverDetails?.phone ? driverDetails.phone.slice(0, 5) : '...'}...</h5>
               </div>
             </div>
           </div>

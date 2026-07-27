@@ -345,7 +345,9 @@ export default function DriverDashboard() {
             trackingId: driver.trackingId,
             lat: currentLat,
             lng: currentLng,
-            speed: currentSpeed
+            speed: currentSpeed,
+            pickupCoords: jobDetails.pickupCoords,
+            dropoffCoords: jobDetails.dropoffCoords
           });
         }
 
